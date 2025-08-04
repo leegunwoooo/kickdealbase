@@ -46,11 +46,10 @@ public class UserController {
     }
 
     @PutMapping
-    public ResponseEntity<String> logout(
+    public void logout(
             @AuthenticationPrincipal User user
     ){
         logoutUseCase.execute(user);
-        return ResponseEntity.ok("로그아웃");
     }
 
 }
