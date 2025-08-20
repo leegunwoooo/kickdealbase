@@ -53,9 +53,4 @@ public class UserController {
         return ResponseEntity.ok("로그아웃");
     }
 
-    @GetMapping("/test")
-    public ResponseEntity<String> test(){
-        return ResponseEntity.ok("test");
-    }
-
 }
