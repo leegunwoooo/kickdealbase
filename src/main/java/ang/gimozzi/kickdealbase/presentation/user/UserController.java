@@ -31,7 +31,7 @@ public class UserController {
         return ResponseEntity.ok(signUpUseCase.execute(request));
     }
 
-    @PostMapping("/login")
+    @PatchMapping
     public ResponseEntity<TokenResponse> login(
             @RequestBody @Valid LoginRequest request
     ){
