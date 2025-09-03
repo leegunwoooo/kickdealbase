@@ -1,7 +1,7 @@
 package ang.gimozzi.kickdealbase.shared.config;
 
-import ang.gimozzi.kickdealbase.shared.jwt.JWTAuthenticationFilter;
-import ang.gimozzi.kickdealbase.shared.jwt.service.TokenService;
+import ang.gimozzi.kickdealbase.infrastructure.jwt.JWTAuthenticationFilter;
+import ang.gimozzi.kickdealbase.infrastructure.jwt.service.TokenService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

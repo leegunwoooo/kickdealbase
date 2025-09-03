@@ -5,7 +5,7 @@ import ang.gimozzi.kickdealbase.application.user.SignUpUseCase;
 import ang.gimozzi.kickdealbase.presentation.user.dto.request.LoginRequest;
 import ang.gimozzi.kickdealbase.presentation.user.dto.request.SignUpRequest;
 import ang.gimozzi.kickdealbase.presentation.user.dto.response.UserResponse;
-import ang.gimozzi.kickdealbase.shared.jwt.dto.response.TokenResponse;
+import ang.gimozzi.kickdealbase.infrastructure.jwt.dto.response.TokenResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

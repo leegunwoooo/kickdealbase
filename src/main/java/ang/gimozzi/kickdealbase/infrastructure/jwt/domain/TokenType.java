@@ -1,4 +1,4 @@
-package ang.gimozzi.kickdealbase.shared.jwt.domain;
+package ang.gimozzi.kickdealbase.infrastructure.jwt.domain;
 
 public enum TokenType {
     REFRESH_TOKEN,

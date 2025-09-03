@@ -1,7 +1,7 @@
-package ang.gimozzi.kickdealbase.shared.jwt;
+package ang.gimozzi.kickdealbase.infrastructure.jwt;
 
 import ang.gimozzi.kickdealbase.domain.user.User;
-import ang.gimozzi.kickdealbase.shared.jwt.service.TokenService;
+import ang.gimozzi.kickdealbase.infrastructure.jwt.service.TokenService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;

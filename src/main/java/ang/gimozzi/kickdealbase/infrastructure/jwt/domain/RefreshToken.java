@@ -1,4 +1,4 @@
-package ang.gimozzi.kickdealbase.shared.jwt.domain;
+package ang.gimozzi.kickdealbase.infrastructure.jwt.domain;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.Getter;
