@@ -1,5 +1,6 @@
 package ang.gimozzi.kickdealbase.application;
 
+import ang.gimozzi.kickdealbase.domain.Role;
 import ang.gimozzi.kickdealbase.domain.User;
 import ang.gimozzi.kickdealbase.infrastructure.UserRepository;
 import ang.gimozzi.kickdealbase.presentation.SignUpRequest;
@@ -25,6 +26,7 @@ public class SignUpUseCase {
                                 .email(request.getEmail())
                                 .username(request.getUsername())
                                 .password(passwordEncoder.encode(request.getPassword()))
+                                .role(Role.USER)
                                 .build()
         ));
     }

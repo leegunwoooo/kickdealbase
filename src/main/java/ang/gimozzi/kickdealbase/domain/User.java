@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Table(name = "tbl_user")
 public class User {
 
     @Id
@@ -23,11 +24,14 @@ public class User {
 
     private String password;
 
+    private Role role;
+
     @Builder
-    public User(String username, String password, String email) {
+    public User(String username, String password, String email, Role role) {
         this.username = username;
         this.email = email;
         this.password = password;
+        this.role = role;
     }
 
     public void updateUsername(String username) {
