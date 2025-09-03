@@ -13,3 +13,6 @@ spring:
     hibernate:
       ddl-auto: update
 
+jwt:
+  secret: ${SECRET_KEY}
+
