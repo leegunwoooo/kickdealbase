@@ -59,24 +59,24 @@ public class TokenService {
                 .compact();
     }
 
-    public String refreshAccessToken(String refreshToken) throws IOException {
+    public String refreshAccessToken(String refreshToken){
         Claims claims = parseToken(refreshToken);
 
         String type = claims.get("type", String.class);
         if (!TokenType.REFRESH_TOKEN.name().equals(type)) {
-            throw new IOException();
+            throw new IllegalArgumentException("Invalid token type");
         }
 
         Long id = claims.get("id", Long.class);
         RefreshToken token = refreshTokenRepository.findById(id)
-                .orElseThrow(() -> new IOException("ㅗ"));
+                .orElseThrow(() -> new IllegalArgumentException("ㅗ"));
 
         if (!token.getRefreshToken().equals(refreshToken)) {
-            throw new IOException();
+            throw new IllegalArgumentException("응");
         }
 
         User user = userRepository.findById(id)
-                .orElseThrow(() -> new IOException("ㅇㅇ"));
+                .orElseThrow(() -> new IllegalArgumentException("ㅇㅇ"));
 
         return generateAccessToken(user);
     }
