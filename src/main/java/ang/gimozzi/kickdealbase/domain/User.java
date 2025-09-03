@@ -20,11 +20,14 @@ public class User {
 
     private String username;
 
+    private String email;
+
     private String password;
 
     @Builder
-    public User(String username, String password){
+    public User(String username, String password, String email) {
         this.username = username;
+        this.email = email;
         this.password = password;
     }
 
@@ -35,4 +38,5 @@ public class User {
     public void updatePassword(String newPassword){
         this.password = newPassword;
     }
+
 }
