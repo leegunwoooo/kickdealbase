@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  mysql:
+    container_name: kickdeal.db
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: "kickdeal"
+      POSTGRES_PASSWORD: "1234"
+      POSTGRES_DB: "kickdeal"
+    ports:
+      - "5432:5432"
