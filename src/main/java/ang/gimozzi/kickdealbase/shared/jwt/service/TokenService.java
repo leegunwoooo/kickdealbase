@@ -1,8 +1,11 @@
-package ang.gimozzi.kickdealbase.shared;
+package ang.gimozzi.kickdealbase.shared.jwt.service;
 
-import ang.gimozzi.kickdealbase.domain.Role;
-import ang.gimozzi.kickdealbase.domain.User;
+import ang.gimozzi.kickdealbase.domain.user.Role;
+import ang.gimozzi.kickdealbase.domain.user.User;
 import ang.gimozzi.kickdealbase.infrastructure.UserRepository;
+import ang.gimozzi.kickdealbase.shared.jwt.domain.RefreshToken;
+import ang.gimozzi.kickdealbase.shared.jwt.domain.RefreshTokenRepository;
+import ang.gimozzi.kickdealbase.shared.jwt.domain.TokenType;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

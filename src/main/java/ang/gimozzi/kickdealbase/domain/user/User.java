@@ -1,4 +1,4 @@
-package ang.gimozzi.kickdealbase.domain;
+package ang.gimozzi.kickdealbase.domain.user;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;

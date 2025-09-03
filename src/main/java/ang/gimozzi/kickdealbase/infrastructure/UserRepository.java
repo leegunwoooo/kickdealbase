@@ -1,6 +1,6 @@
 package ang.gimozzi.kickdealbase.infrastructure;
 
-import ang.gimozzi.kickdealbase.domain.User;
+import ang.gimozzi.kickdealbase.domain.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

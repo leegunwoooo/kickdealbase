@@ -1,6 +1,6 @@
-package ang.gimozzi.kickdealbase.presentation;
+package ang.gimozzi.kickdealbase.presentation.user.dto.response;
 
-import ang.gimozzi.kickdealbase.domain.User;
+import ang.gimozzi.kickdealbase.domain.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

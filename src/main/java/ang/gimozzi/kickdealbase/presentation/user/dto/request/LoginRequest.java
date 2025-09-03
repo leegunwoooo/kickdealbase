@@ -1,4 +1,4 @@
-package ang.gimozzi.kickdealbase.presentation;
+package ang.gimozzi.kickdealbase.presentation.user.dto.request;
 
 import lombok.Getter;
 

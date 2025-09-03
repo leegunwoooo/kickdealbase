@@ -1,4 +1,4 @@
-package ang.gimozzi.kickdealbase.shared;
+package ang.gimozzi.kickdealbase.shared.jwt.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

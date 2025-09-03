@@ -1,4 +1,4 @@
-package ang.gimozzi.kickdealbase.shared;
+package ang.gimozzi.kickdealbase.shared.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
