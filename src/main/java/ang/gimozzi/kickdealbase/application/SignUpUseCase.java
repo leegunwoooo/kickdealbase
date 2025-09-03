@@ -16,6 +16,9 @@ public class SignUpUseCase {
     private final PasswordEncoder passwordEncoder;
 
     public UserResponse execute(SignUpRequest request){
+
+        valid(request);
+
         return new UserResponse(
                 userRepository.save(
                         User.builder()
@@ -24,6 +27,12 @@ public class SignUpUseCase {
                                 .password(passwordEncoder.encode(request.getPassword()))
                                 .build()
         ));
+    }
+
+    public void valid(SignUpRequest request){
+        if(userRepository.existsByUsername(request.getUsername())||userRepository.existsByEmail(request.getEmail())){
+            throw new IllegalStateException("이미 존재하는 닉네임 또는 이메일입니다.");
+        }
     }
 
 }
