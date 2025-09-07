@@ -5,7 +5,6 @@ import ang.gimozzi.kickdealbase.application.user.LogoutUseCase;
 import ang.gimozzi.kickdealbase.application.user.RefreshUseCase;
 import ang.gimozzi.kickdealbase.application.user.SignUpUseCase;
 import ang.gimozzi.kickdealbase.domain.user.User;
-import ang.gimozzi.kickdealbase.infrastructure.jwt.domain.RefreshTokenRepository;
 import ang.gimozzi.kickdealbase.presentation.user.dto.request.LoginRequest;
 import ang.gimozzi.kickdealbase.presentation.user.dto.request.SignUpRequest;
 import ang.gimozzi.kickdealbase.presentation.user.dto.response.UserResponse;
