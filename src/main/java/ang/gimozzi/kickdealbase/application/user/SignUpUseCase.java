@@ -2,7 +2,7 @@ package ang.gimozzi.kickdealbase.application.user;
 
 import ang.gimozzi.kickdealbase.domain.user.Role;
 import ang.gimozzi.kickdealbase.domain.user.User;
-import ang.gimozzi.kickdealbase.infrastructure.UserRepository;
+import ang.gimozzi.kickdealbase.infrastructure.persistence.UserRepository;
 import ang.gimozzi.kickdealbase.presentation.user.dto.request.SignUpRequest;
 import ang.gimozzi.kickdealbase.presentation.user.dto.response.UserResponse;
 import ang.gimozzi.kickdealbase.shared.annotation.UseCase;

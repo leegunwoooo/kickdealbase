@@ -1,7 +1,7 @@
 package ang.gimozzi.kickdealbase.application.user;
 
 import ang.gimozzi.kickdealbase.domain.user.User;
-import ang.gimozzi.kickdealbase.infrastructure.UserRepository;
+import ang.gimozzi.kickdealbase.infrastructure.persistence.UserRepository;
 import ang.gimozzi.kickdealbase.presentation.user.dto.request.LoginRequest;
 import ang.gimozzi.kickdealbase.infrastructure.jwt.dto.response.TokenResponse;
 import ang.gimozzi.kickdealbase.infrastructure.jwt.service.TokenService;
