@@ -3,6 +3,7 @@ package ang.gimozzi.kickdealbase.domain.product;
 import ang.gimozzi.kickdealbase.domain.user.User;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -23,5 +24,15 @@ public class Product {
 
     @ManyToOne
     private User seller;
+
+    private String imageUrl;
+
+    @Builder
+    public Product(String name, String description, User seller, String imageUrl) {
+        this.name = name;
+        this.description = description;
+        this.seller = seller;
+        this.imageUrl = imageUrl;
+    }
 
 }
