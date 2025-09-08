@@ -2,7 +2,7 @@ package ang.gimozzi.kickdealbase.infrastructure.jwt.service;
 
 import ang.gimozzi.kickdealbase.domain.user.Role;
 import ang.gimozzi.kickdealbase.domain.user.User;
-import ang.gimozzi.kickdealbase.infrastructure.UserRepository;
+import ang.gimozzi.kickdealbase.infrastructure.persistence.UserRepository;
 import ang.gimozzi.kickdealbase.infrastructure.jwt.domain.RefreshToken;
 import ang.gimozzi.kickdealbase.infrastructure.jwt.domain.RefreshTokenRepository;
 import ang.gimozzi.kickdealbase.infrastructure.jwt.domain.TokenType;
