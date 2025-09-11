@@ -4,6 +4,8 @@ import ang.gimozzi.kickdealbase.domain.product.Product;
 import ang.gimozzi.kickdealbase.domain.user.User;
 import ang.gimozzi.kickdealbase.infrastructure.persistence.ProductRepository;
 import ang.gimozzi.kickdealbase.infrastructure.s3.S3Service;
+import ang.gimozzi.kickdealbase.presentation.product.dto.ProductRequest;
+import ang.gimozzi.kickdealbase.presentation.product.dto.ProductResponse;
 import ang.gimozzi.kickdealbase.shared.annotation.UseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
