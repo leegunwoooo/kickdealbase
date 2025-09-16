@@ -9,6 +9,8 @@ import ang.gimozzi.kickdealbase.shared.annotation.UseCase;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
+import java.util.Map;
+
 @UseCase
 @RequiredArgsConstructor
 public class DeleteProductUseCase {
@@ -18,7 +20,7 @@ public class DeleteProductUseCase {
     private final S3Service s3Service;
 
     @Transactional
-    public String deleteProduct(Long productId, User user){
+    public Map<String, String> deleteProduct(Long productId, User user){
 
         Product product = productFacade.getProduct(productId);
 
@@ -28,7 +30,7 @@ public class DeleteProductUseCase {
 
         productRepository.delete(product);
 
-        return "삭제되었습니다.";
+        return Map.of("message", "삭제되었습니다.");
 
     }
 
