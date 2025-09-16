@@ -1,6 +1,7 @@
 package ang.gimozzi.kickdealbase.application.product;
 
 import ang.gimozzi.kickdealbase.domain.product.Product;
+import ang.gimozzi.kickdealbase.domain.product.service.ProductFacade;
 import ang.gimozzi.kickdealbase.domain.user.User;
 import ang.gimozzi.kickdealbase.infrastructure.persistence.ProductRepository;
 import ang.gimozzi.kickdealbase.infrastructure.s3.S3Service;
@@ -13,23 +14,29 @@ import org.springframework.web.multipart.MultipartFile;
 
 @UseCase
 @RequiredArgsConstructor
-public class CreateProductUseCase {
+public class UpdateProductUseCase {
 
     private final ProductRepository productRepository;
     private final S3Service s3Service;
+    private final ProductFacade productFacade;
 
     @Transactional
-    public ProductResponse createProduct(ProductRequest request, MultipartFile image, User user){
-        String url = s3Service.uploadFile(image);
+    public ProductResponse updateProduct(ProductRequest request, MultipartFile image, User user, Long productId) {
 
-        return new ProductResponse(productRepository.save(
-                Product.builder()
-                        .name(request.getName())
-                        .description(request.getDescription())
-                        .seller(user)
-                        .imageUrl(url)
-                        .build()
-        ));
+        Product product = productFacade.getProduct(productId);
+
+        product.validUser(user);
+
+        String url = product.getImageUrl();
+
+        if (image != null && !image.isEmpty()) {
+            url = s3Service.uploadFile(image);
+        }
+
+        product.update(request.getName(), request.getDescription(), url);
+
+        return new ProductResponse(product);
+
     }
 
 }

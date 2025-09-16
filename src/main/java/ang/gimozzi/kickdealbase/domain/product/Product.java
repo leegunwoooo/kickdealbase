@@ -35,4 +35,16 @@ public class Product {
         this.imageUrl = imageUrl;
     }
 
+    public void update(String name, String description, String imageUrl) {
+        this.name = name;
+        this.description = description;
+        this.imageUrl = imageUrl;
+    }
+
+    public void validUser(User user){
+        if(!this.seller.getId().equals(user.getId())){
+            throw new IllegalArgumentException("작성자만 수정할 수 있습니다.");
+        }
+    }
+
 }
