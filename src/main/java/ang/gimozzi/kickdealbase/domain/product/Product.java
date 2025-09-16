@@ -42,7 +42,7 @@ public class Product {
     }
 
     public void validUser(User user){
-        if(this.seller != user){
+        if(!this.seller.getId().equals(user.getId())){
             throw new IllegalArgumentException("작성자만 수정할 수 있습니다.");
         }
     }
