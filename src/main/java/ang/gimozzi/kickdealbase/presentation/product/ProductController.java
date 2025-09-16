@@ -54,7 +54,7 @@ public class ProductController {
         return ResponseEntity.ok(viewOneProductUseCase.getOneProduct(id));
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteProduct(
             @PathVariable Long id,
             @AuthenticationPrincipal User user
