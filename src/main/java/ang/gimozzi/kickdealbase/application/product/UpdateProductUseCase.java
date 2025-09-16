@@ -27,7 +27,11 @@ public class UpdateProductUseCase {
 
         product.validUser(user);
 
-        String url = s3Service.uploadFile(image);
+        String url = product.getImageUrl();
+
+        if (image != null && !image.isEmpty()) {
+            url = s3Service.uploadFile(image);
+        }
 
         product.update(request.getName(), request.getDescription(), url);
 

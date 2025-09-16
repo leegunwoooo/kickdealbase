@@ -36,7 +36,7 @@ public class ProductController {
     @PatchMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE, value = "/{id}")
     public ResponseEntity<ProductResponse> updateProduct(
             @RequestPart("product") ProductRequest productRequest,
-            @RequestPart("image") MultipartFile image,
+            @RequestPart(value = "image", required = false) MultipartFile image,
             @AuthenticationPrincipal User user,
             @PathVariable Long id
     ){
