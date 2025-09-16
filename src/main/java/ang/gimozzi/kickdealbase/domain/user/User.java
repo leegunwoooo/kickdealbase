@@ -16,20 +16,20 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
-    private String username;
-
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String email;
+
+    @Column(unique = true, nullable = false)
+    private String username;
 
     private String password;
 
     private Role role;
 
     @Builder
-    public User(String username, String password, String email, Role role) {
-        this.username = username;
+    public User(String email, String username, String password, Role role) {
         this.email = email;
+        this.username = username;
         this.password = password;
         this.role = role;
     }
