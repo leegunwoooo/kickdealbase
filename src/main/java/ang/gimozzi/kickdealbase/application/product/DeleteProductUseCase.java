@@ -6,6 +6,7 @@ import ang.gimozzi.kickdealbase.domain.user.User;
 import ang.gimozzi.kickdealbase.infrastructure.persistence.ProductRepository;
 import ang.gimozzi.kickdealbase.infrastructure.s3.S3Service;
 import ang.gimozzi.kickdealbase.shared.annotation.UseCase;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @UseCase
@@ -16,6 +17,7 @@ public class DeleteProductUseCase {
     private final ProductRepository productRepository;
     private final S3Service s3Service;
 
+    @Transactional
     public String deleteProduct(Long productId, User user){
 
         Product product = productFacade.getProduct(productId);

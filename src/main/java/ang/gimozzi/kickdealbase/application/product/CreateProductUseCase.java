@@ -7,6 +7,7 @@ import ang.gimozzi.kickdealbase.infrastructure.s3.S3Service;
 import ang.gimozzi.kickdealbase.presentation.product.dto.ProductRequest;
 import ang.gimozzi.kickdealbase.presentation.product.dto.ProductResponse;
 import ang.gimozzi.kickdealbase.shared.annotation.UseCase;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -17,6 +18,7 @@ public class CreateProductUseCase {
     private final ProductRepository productRepository;
     private final S3Service s3Service;
 
+    @Transactional
     public ProductResponse createProduct(ProductRequest request, MultipartFile image, User user){
         String url = s3Service.uploadFile(image);
 
