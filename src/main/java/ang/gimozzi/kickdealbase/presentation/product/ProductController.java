@@ -14,7 +14,8 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 @RequiredArgsConstructor
-@RestController("/products")
+@RestController
+@RequestMapping(("/products"))
 public class ProductController {
 
     private final CreateProductUseCase createProductUseCase;
