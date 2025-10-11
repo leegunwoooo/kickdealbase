@@ -12,6 +12,8 @@ public class ProductResponse {
 
     private final String description;
 
+    private final Integer price;
+
     private final String seller;
 
     private final String url;
@@ -20,6 +22,7 @@ public class ProductResponse {
         this.id = product.getId();
         this.name = product.getName();
         this.description = product.getDescription();
+        this.price = product.getPrice();
         this.seller = product.getSeller().getUsername();
         this.url = product.getImageUrl();
     }

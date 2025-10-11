@@ -22,22 +22,27 @@ public class Product {
 
     private String description;
 
+    @Column(nullable = false)
+    private Integer price;
+
     @ManyToOne
     private User seller;
 
     private String imageUrl;
 
     @Builder
-    public Product(String name, String description, User seller, String imageUrl) {
+    public Product(String name, String description, Integer price, User seller, String imageUrl) {
         this.name = name;
         this.description = description;
+        this.price = price;
         this.seller = seller;
         this.imageUrl = imageUrl;
     }
 
-    public void update(String name, String description, String imageUrl) {
+    public void update(String name, String description, Integer price, String imageUrl) {
         this.name = name;
         this.description = description;
+        this.price = price;
         this.imageUrl = imageUrl;
     }
 
