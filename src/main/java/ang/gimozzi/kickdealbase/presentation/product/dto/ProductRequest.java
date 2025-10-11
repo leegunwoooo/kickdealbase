@@ -9,4 +9,6 @@ public class ProductRequest {
 
     private String description;
 
+    private Integer price;
+
 }
