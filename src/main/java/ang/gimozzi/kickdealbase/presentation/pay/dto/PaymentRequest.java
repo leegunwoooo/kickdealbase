@@ -9,7 +9,7 @@ public class PaymentRequest {
 
     private String orderId;
 
-    private int amount;
+    private Integer amount;
 
     private String paymentKey;
 
