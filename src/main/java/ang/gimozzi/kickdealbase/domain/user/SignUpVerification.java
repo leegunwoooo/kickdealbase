@@ -1,5 +1,6 @@
 package ang.gimozzi.kickdealbase.domain.user;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -8,7 +9,8 @@ import lombok.NoArgsConstructor;
 import java.util.Random;
 
 @Getter
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor
+@Entity
 public class SignUpVerification {
 
     @Id
