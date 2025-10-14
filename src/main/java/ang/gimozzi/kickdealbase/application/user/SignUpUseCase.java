@@ -1,7 +1,9 @@
 package ang.gimozzi.kickdealbase.application.user;
 
 import ang.gimozzi.kickdealbase.domain.user.Role;
+import ang.gimozzi.kickdealbase.domain.user.SignUpVerification;
 import ang.gimozzi.kickdealbase.domain.user.User;
+import ang.gimozzi.kickdealbase.infrastructure.persistence.SignUpVerificationRepository;
 import ang.gimozzi.kickdealbase.infrastructure.persistence.UserRepository;
 import ang.gimozzi.kickdealbase.presentation.user.dto.request.SignUpRequest;
 import ang.gimozzi.kickdealbase.presentation.user.dto.response.UserResponse;
@@ -14,6 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class SignUpUseCase {
 
     private final UserRepository userRepository;
+    private final SignUpVerificationRepository signUpVerificationRepository;
     private final PasswordEncoder passwordEncoder;
 
     public UserResponse execute(SignUpRequest request){
@@ -35,6 +38,13 @@ public class SignUpUseCase {
         if(userRepository.existsByUsername(request.getUsername())||userRepository.existsByEmail(request.getEmail())){
             throw new IllegalStateException("이미 존재하는 닉네임 또는 이메일입니다.");
         }
+
+        SignUpVerification signUpVerification = signUpVerificationRepository.findById(request.getEmail())
+                .orElseThrow(() -> new IllegalArgumentException("pppp"));
+
+        signUpVerification.validateVerified();
+
+        signUpVerificationRepository.delete(signUpVerification);
     }
 
 }
