@@ -32,5 +32,6 @@ public class S3Config {
                 .enablePathStyleAccess()
                 .build();
     }
+
 }
 
