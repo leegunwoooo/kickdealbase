@@ -60,7 +60,7 @@ jobs:
           if [ $(sudo docker ps -a -q -f name=spring-cicd-test) ]; then
             sudo docker rm -f spring-cicd-test
           fi
-          sudo docker run -d -p 80:8080 --name spring-cicd-test \
+          sudo docker run -d -p 8080:8080 --name spring-cicd-test \
             -e DB_URL=${{ secrets.DB_URL }} \
             -e DB_USERNAME=${{ secrets.DB_USERNAME }} \
             -e DB_PASSWORD=${{ secrets.DB_PASSWORD }} \
