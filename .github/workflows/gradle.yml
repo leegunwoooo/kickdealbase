@@ -27,13 +27,13 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      # Spring Boot 어플리케이션 Build
+      # Spring Boot Build
       - name: Build with Gradle Wrapper
         run: ./gradlew clean build
 
-      # Docker 이미지 Build (빌드 결과 경로 정확히 지정)
+      # Docker Build (레포지토리 루트 기준)
       - name: Build Docker Image
-        run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/spring-cicd-test ./_work/kickdealbase/kickdealbase
+        run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/spring-cicd-test .
 
       # DockerHub Login
       - name: Docker Hub Login
@@ -54,7 +54,7 @@ jobs:
       - name: Pull Docker Image on EC2
         run: sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/spring-cicd-test
 
-      - name: Stop Existing Container (if any)
+      - name: Stop Existing Container
         run: |
           if [ $(sudo docker ps -a -q -f name=spring-cicd-test) ]; then
             sudo docker stop spring-cicd-test
