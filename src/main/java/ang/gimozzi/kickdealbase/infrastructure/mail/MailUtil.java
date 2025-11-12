@@ -20,7 +20,7 @@ public class MailUtil {
 
             mimeMessageHelper.setTo(email);
 
-            mimeMessageHelper.setSubject("호라이즌 인증 코드");
+            mimeMessageHelper.setSubject("킥딜 인증 코드");
 
             String content = """
                 <!DOCTYPE html>
