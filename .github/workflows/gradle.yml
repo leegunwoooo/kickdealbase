@@ -46,6 +46,7 @@ jobs:
       - name: Push Docker Image
         run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/spring-cicd-test
 
+
   run-docker-image-on-ec2:
     needs: build-docker-image
     runs-on: self-hosted
@@ -54,14 +55,12 @@ jobs:
       - name: Pull Docker Image on EC2
         run: sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/spring-cicd-test
 
-      - name: Stop Existing Container
+      - name: Run New Container
         run: |
           if [ $(sudo docker ps -a -q -f name=spring-cicd-test) ]; then
-            sudo docker stop spring-cicd-test
+            sudo docker rm -f spring-cicd-test
           fi
-
-      - name: Run New Container
-        run: sudo docker run -d -p 80:8080 --name spring-cicd-test ${{ secrets.DOCKERHUB_USERNAME }}/spring-cicd-test
+          sudo docker run -d -p 80:8080 --name spring-cicd-test ${{ secrets.DOCKERHUB_USERNAME }}/spring-cicd-test
 
       - name: Cleanup Old Images
         run: sudo docker system prune -f
