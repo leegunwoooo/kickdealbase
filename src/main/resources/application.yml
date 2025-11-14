@@ -48,3 +48,9 @@ payment:
 jwt:
   secret: ${SECRET_KEY}
 
+logging:
+  file:
+    name: app.log
+  level:
+    root: INFO
+
