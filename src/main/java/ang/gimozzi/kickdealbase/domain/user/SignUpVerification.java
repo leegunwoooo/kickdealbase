@@ -2,7 +2,6 @@ package ang.gimozzi.kickdealbase.domain.user;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -39,13 +38,13 @@ public class SignUpVerification {
 
     public void validateCode(String requestCode){
         if(!code.equals(requestCode)){
-            throw new IllegalArgumentException("Invalid request code");
+            throw new IllegalArgumentException("잘못된 코드");
         }
     }
 
     public void validateVerified(){
         if(!isVerified){
-            throw new IllegalArgumentException("Invalid verification code");
+            throw new IllegalArgumentException("인증되지 않음 이메일");
         }
     }
 
