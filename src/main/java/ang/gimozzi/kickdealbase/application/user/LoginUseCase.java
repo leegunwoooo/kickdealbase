@@ -19,7 +19,7 @@ public class LoginUseCase {
 
     public TokenResponse execute(LoginRequest request){
         User user = userRepository.findByEmail(request.getEmail())
-                .orElseThrow(() -> new IllegalArgumentException("ㅎㅎ"));
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 유저"));
 
         valid(request, user);
 

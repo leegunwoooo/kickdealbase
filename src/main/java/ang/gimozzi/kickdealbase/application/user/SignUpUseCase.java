@@ -40,7 +40,7 @@ public class SignUpUseCase {
         }
 
         SignUpVerification signUpVerification = signUpVerificationRepository.findById(request.getEmail())
-                .orElseThrow(() -> new IllegalArgumentException("pppp"));
+                .orElseThrow(() -> new IllegalArgumentException("인증코드를 찾지 못함"));
 
         signUpVerification.validateVerified();
 

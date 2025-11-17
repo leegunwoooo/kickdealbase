@@ -44,7 +44,7 @@ public class SignUpVerification {
 
     public void validateVerified(){
         if(!isVerified){
-            throw new IllegalArgumentException("인증되지 않음 이메일");
+            throw new IllegalArgumentException("인증되지 않은 이메일");
         }
     }
 

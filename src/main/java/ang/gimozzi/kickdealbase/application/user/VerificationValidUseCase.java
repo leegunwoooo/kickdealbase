@@ -14,7 +14,7 @@ public class VerificationValidUseCase {
 
     public void verify(VerifyRequest request){
         SignUpVerification signUpVerification = signUpVerificationRepository.findById(request.getEmail())
-                        .orElseThrow(() -> new IllegalArgumentException("qq"));
+                        .orElseThrow(() -> new IllegalArgumentException("인증 코드를 찾지 못했습니다."));
 
         signUpVerification.validateCode(request.getCode());
 
