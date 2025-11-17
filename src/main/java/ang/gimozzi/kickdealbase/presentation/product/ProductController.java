@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
-import java.util.Map;
 
 @RequiredArgsConstructor
 @RestController
@@ -57,11 +56,11 @@ public class ProductController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Map<String, String>> deleteProduct(
+    public void deleteProduct(
             @PathVariable Long id,
             @AuthenticationPrincipal User user
     ) {
-        return ResponseEntity.ok(deleteProductUseCase.deleteProduct(id, user));
+        deleteProductUseCase.deleteProduct(id, user);
     }
 
 }
