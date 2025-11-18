@@ -33,7 +33,7 @@ public class UpdateProductUseCase {
             url = s3Service.uploadFile(image);
         }
 
-        product.update(request.getName(), request.getDescription(), request.getPrice(), url);
+        product.update(request.getName(), request.getDescription(), request.getCategory(), request.getPrice(), url);
 
         return new ProductResponse(product);
 
