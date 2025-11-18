@@ -18,6 +18,5 @@ public class UserResponse {
         this.id = user.getId();
         this.email = user.getEmail();
         this.username = user.getUsername();
-
     }
 }
