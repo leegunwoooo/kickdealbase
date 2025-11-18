@@ -18,9 +18,8 @@ public class ViewProductByCategory {
 
     @Transactional(readOnly = true)
     public List<ProductResponse> viewProductByCategory(Category category) {
-        List<Product> productList = productRepository.findProductsByCategory(category);
 
-        return productList
+        return productRepository.findProductsByCategory(category)
                 .stream()
                 .map(ProductResponse::new)
                 .toList();

@@ -5,6 +5,7 @@ import ang.gimozzi.kickdealbase.infrastructure.persistence.ProductRepository;
 import ang.gimozzi.kickdealbase.presentation.product.dto.ProductResponse;
 import ang.gimozzi.kickdealbase.shared.annotation.UseCase;
 import lombok.RequiredArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -14,10 +15,9 @@ public class QueryProductByNameUseCase {
 
     private final ProductRepository productRepository;
 
+    @Transactional(readOnly = true)
     public List<ProductResponse> getProductsByName(String keyword) {
-        List<Product> products = productRepository.findProductsByNameContaining(keyword);
-
-        return products
+        return productRepository.findProductsByNameContaining(keyword)
                 .stream()
                 .map(ProductResponse::new)
                 .toList();
