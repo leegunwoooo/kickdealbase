@@ -25,6 +25,7 @@ public class ProductController {
     private final ViewOneProductUseCase viewOneProductUseCase;
     private final DeleteProductUseCase deleteProductUseCase;
     private final ViewProductByCategory viewProductByCategoryUseCase;
+    private final QueryProductByNameUseCase queryProductByNameUseCase;
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<ProductResponse> createProduct(
@@ -70,6 +71,13 @@ public class ProductController {
             @RequestParam(name = "category") Category category
     ){
         return viewProductByCategoryUseCase.viewProductByCategory(category);
+    }
+
+    @GetMapping("/query")
+    public List<ProductResponse> getProductsByQuery(
+            @RequestParam(name = "query") String keyword
+    ){
+        return queryProductByNameUseCase.getProductsByName(keyword);
     }
 
 }
