@@ -1,5 +1,6 @@
 package ang.gimozzi.kickdealbase.presentation.product.dto;
 
+import ang.gimozzi.kickdealbase.domain.product.Category;
 import ang.gimozzi.kickdealbase.domain.product.Product;
 import lombok.Getter;
 
@@ -12,6 +13,8 @@ public class ProductResponse {
 
     private final String description;
 
+    private final Category category;
+
     private final Integer price;
 
     private final String seller;
@@ -22,6 +25,7 @@ public class ProductResponse {
         this.id = product.getId();
         this.name = product.getName();
         this.description = product.getDescription();
+        this.category = product.getCategory();
         this.price = product.getPrice();
         this.seller = product.getSeller().getUsername();
         this.url = product.getImageUrl();

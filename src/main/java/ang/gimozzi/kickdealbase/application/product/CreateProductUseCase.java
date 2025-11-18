@@ -26,6 +26,7 @@ public class CreateProductUseCase {
                 Product.builder()
                         .name(request.getName())
                         .description(request.getDescription())
+                        .category(request.getCategory())
                         .seller(user)
                         .imageUrl(url)
                         .build()

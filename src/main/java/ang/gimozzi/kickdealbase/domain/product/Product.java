@@ -22,6 +22,9 @@ public class Product {
 
     private String description;
 
+    @Enumerated(EnumType.STRING)
+    private Category category;
+
     @Column(nullable = false)
     private Integer price;
 
@@ -31,17 +34,19 @@ public class Product {
     private String imageUrl;
 
     @Builder
-    public Product(String name, String description, Integer price, User seller, String imageUrl) {
+    public Product(String name, String description, Category category, Integer price, User seller, String imageUrl) {
         this.name = name;
         this.description = description;
+        this.category = category;
         this.price = price;
         this.seller = seller;
         this.imageUrl = imageUrl;
     }
 
-    public void update(String name, String description, Integer price, String imageUrl) {
+    public void update(String name, String description, Category category, Integer price, String imageUrl) {
         this.name = name;
         this.description = description;
+        this.category = category;
         this.price = price;
         this.imageUrl = imageUrl;
     }
