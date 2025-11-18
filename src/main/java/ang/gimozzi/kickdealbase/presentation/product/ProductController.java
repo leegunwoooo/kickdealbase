@@ -1,6 +1,7 @@
 package ang.gimozzi.kickdealbase.presentation.product;
 
 import ang.gimozzi.kickdealbase.application.product.*;
+import ang.gimozzi.kickdealbase.domain.product.Category;
 import ang.gimozzi.kickdealbase.domain.user.User;
 import ang.gimozzi.kickdealbase.presentation.product.dto.ProductRequest;
 import ang.gimozzi.kickdealbase.presentation.product.dto.ProductResponse;
@@ -15,7 +16,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping(("/products"))
+@RequestMapping("/products")
 public class ProductController {
 
     private final CreateProductUseCase createProductUseCase;
@@ -23,6 +24,7 @@ public class ProductController {
     private final ViewAllProductUseCase viewAllProductUseCase;
     private final ViewOneProductUseCase viewOneProductUseCase;
     private final DeleteProductUseCase deleteProductUseCase;
+    private final ViewProductByCategory viewProductByCategoryUseCase;
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<ProductResponse> createProduct(
@@ -61,6 +63,13 @@ public class ProductController {
             @AuthenticationPrincipal User user
     ) {
         deleteProductUseCase.deleteProduct(id, user);
+    }
+
+    @GetMapping("/categories")
+    public List<ProductResponse> getProductsByCategory(
+            @RequestParam(name = "category") Category category
+    ){
+        return viewProductByCategoryUseCase.viewProductByCategory(category);
     }
 
 }

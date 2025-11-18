@@ -1,9 +1,6 @@
 package ang.gimozzi.kickdealbase.presentation.user;
 
-import ang.gimozzi.kickdealbase.application.user.LoginUseCase;
-import ang.gimozzi.kickdealbase.application.user.LogoutUseCase;
-import ang.gimozzi.kickdealbase.application.user.RefreshUseCase;
-import ang.gimozzi.kickdealbase.application.user.SignUpUseCase;
+import ang.gimozzi.kickdealbase.application.user.*;
 import ang.gimozzi.kickdealbase.domain.user.User;
 import ang.gimozzi.kickdealbase.presentation.user.dto.request.LoginRequest;
 import ang.gimozzi.kickdealbase.presentation.user.dto.request.SignUpRequest;
@@ -24,6 +21,7 @@ public class UserController {
     private final LoginUseCase loginUseCase;
     private final LogoutUseCase logoutUseCase;
     private final RefreshUseCase refreshUseCase;
+    private final UserInfoUseCase userInfoUseCase;
 
     @PostMapping
     public ResponseEntity<UserResponse> signUp(
@@ -50,6 +48,11 @@ public class UserController {
             @AuthenticationPrincipal User user
     ){
         logoutUseCase.execute(user);
+    }
+
+    @GetMapping("/info")
+    public UserResponse info(@AuthenticationPrincipal User user){
+        return userInfoUseCase.getUserInfo(user);
     }
 
 }
