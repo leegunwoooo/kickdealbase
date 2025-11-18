@@ -21,7 +21,7 @@ public class LoginUseCase {
         User user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 유저"));
 
-        valid(request, user);
+        valid(request.getPassword(), user);
 
         return new TokenResponse(
                 tokenService.generateAccessToken(user),
@@ -29,8 +29,8 @@ public class LoginUseCase {
         );
     }
 
-    public void valid(LoginRequest request, User user){
-        if(!bCryptPasswordEncoder.matches(request.getPassword(), user.getPassword())){
+    public void valid(String rawPassword, User user){
+        if(!bCryptPasswordEncoder.matches(rawPassword, user.getPassword())){
             throw new IllegalArgumentException("비밀번호 불일치");
         }
     }

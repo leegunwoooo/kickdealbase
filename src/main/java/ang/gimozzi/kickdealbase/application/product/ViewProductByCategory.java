@@ -1,7 +1,6 @@
 package ang.gimozzi.kickdealbase.application.product;
 
 import ang.gimozzi.kickdealbase.domain.product.Category;
-import ang.gimozzi.kickdealbase.domain.product.Product;
 import ang.gimozzi.kickdealbase.infrastructure.persistence.ProductRepository;
 import ang.gimozzi.kickdealbase.presentation.product.dto.ProductResponse;
 import ang.gimozzi.kickdealbase.shared.annotation.UseCase;
@@ -18,7 +17,6 @@ public class ViewProductByCategory {
 
     @Transactional(readOnly = true)
     public List<ProductResponse> viewProductByCategory(Category category) {
-
         return productRepository.findProductsByCategory(category)
                 .stream()
                 .map(ProductResponse::new)
