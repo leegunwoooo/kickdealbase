@@ -57,4 +57,7 @@ public class Product {
         }
     }
 
+    public Long getSellerId(){
+        return seller.getId();
+    }
 }

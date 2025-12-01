@@ -7,9 +7,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.HashSet;
-import java.util.Set;
-
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -21,17 +18,17 @@ public class ChatRoom {
     private Long id;
 
     @ManyToOne
-    private User user1;
+    private User buyer;
 
     @ManyToOne
-    private User user2;
+    private User seller;
 
     private String name;
 
     @Builder
-    public ChatRoom(User user1, User user2, String name) {
-        this.user1 = user1;
-        this.user2 = user2;
+    public ChatRoom(User buyer, User seller, String name) {
+        this.buyer = buyer;
+        this.seller = seller;
         this.name = name;
     }
 
