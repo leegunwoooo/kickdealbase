@@ -4,7 +4,7 @@ import ang.gimozzi.kickdealbase.domain.chatroom.ChatRoom;
 import ang.gimozzi.kickdealbase.domain.chatroom.service.ChatRoomFacade;
 import ang.gimozzi.kickdealbase.domain.message.Message;
 import ang.gimozzi.kickdealbase.infrastructure.persistence.MessageRepository;
-import ang.gimozzi.kickdealbase.presentation.message.ListSimpleMessageResponse;
+import ang.gimozzi.kickdealbase.presentation.message.dto.response.ListSimpleMessageResponse;
 import ang.gimozzi.kickdealbase.shared.annotation.UseCase;
 import lombok.RequiredArgsConstructor;
 

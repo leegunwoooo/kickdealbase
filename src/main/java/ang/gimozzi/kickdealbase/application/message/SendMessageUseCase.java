@@ -7,8 +7,8 @@ import ang.gimozzi.kickdealbase.domain.message.MessageType;
 import ang.gimozzi.kickdealbase.domain.user.User;
 import ang.gimozzi.kickdealbase.domain.user.service.UserFacade;
 import ang.gimozzi.kickdealbase.infrastructure.persistence.MessageRepository;
-import ang.gimozzi.kickdealbase.presentation.message.MessageRequest;
-import ang.gimozzi.kickdealbase.presentation.message.MessageResponse;
+import ang.gimozzi.kickdealbase.presentation.message.dto.request.MessageRequest;
+import ang.gimozzi.kickdealbase.presentation.message.dto.response.MessageResponse;
 import ang.gimozzi.kickdealbase.shared.annotation.UseCase;
 import lombok.RequiredArgsConstructor;
 

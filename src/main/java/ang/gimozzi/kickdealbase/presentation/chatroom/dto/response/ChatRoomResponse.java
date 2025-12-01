@@ -1,4 +1,4 @@
-package ang.gimozzi.kickdealbase.presentation.chatroom;
+package ang.gimozzi.kickdealbase.presentation.chatroom.dto.response;
 
 import ang.gimozzi.kickdealbase.domain.chatroom.ChatRoom;
 

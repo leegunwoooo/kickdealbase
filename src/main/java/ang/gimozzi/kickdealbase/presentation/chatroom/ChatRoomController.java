@@ -2,6 +2,7 @@ package ang.gimozzi.kickdealbase.presentation.chatroom;
 
 import ang.gimozzi.kickdealbase.application.chatroom.CreateChatRoomUseCase;
 import ang.gimozzi.kickdealbase.domain.user.User;
+import ang.gimozzi.kickdealbase.presentation.chatroom.dto.response.ChatRoomResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PathVariable;

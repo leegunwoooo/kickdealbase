@@ -6,7 +6,7 @@ import ang.gimozzi.kickdealbase.domain.product.service.ProductFacade;
 import ang.gimozzi.kickdealbase.domain.user.User;
 import ang.gimozzi.kickdealbase.domain.user.service.UserFacade;
 import ang.gimozzi.kickdealbase.infrastructure.persistence.ChatRoomRepository;
-import ang.gimozzi.kickdealbase.presentation.chatroom.ChatRoomResponse;
+import ang.gimozzi.kickdealbase.presentation.chatroom.dto.response.ChatRoomResponse;
 import ang.gimozzi.kickdealbase.shared.annotation.UseCase;
 import lombok.RequiredArgsConstructor;
 

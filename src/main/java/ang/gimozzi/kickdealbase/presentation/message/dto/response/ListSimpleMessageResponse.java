@@ -1,4 +1,4 @@
-package ang.gimozzi.kickdealbase.presentation.message;
+package ang.gimozzi.kickdealbase.presentation.message.dto.response;
 
 import ang.gimozzi.kickdealbase.domain.message.Message;
 

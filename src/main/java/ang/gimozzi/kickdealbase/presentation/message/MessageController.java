@@ -2,6 +2,8 @@ package ang.gimozzi.kickdealbase.presentation.message;
 
 import ang.gimozzi.kickdealbase.application.message.SendMessageUseCase;
 import ang.gimozzi.kickdealbase.domain.user.User;
+import ang.gimozzi.kickdealbase.presentation.message.dto.request.MessageRequest;
+import ang.gimozzi.kickdealbase.presentation.message.dto.response.MessageResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
