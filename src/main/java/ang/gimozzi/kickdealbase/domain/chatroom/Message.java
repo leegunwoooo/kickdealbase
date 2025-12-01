@@ -41,5 +41,16 @@ public class Message {
         this.timestamp = LocalDateTime.now();
     }
 
+    public Long getRoomId() {
+        return room.getId();
+    }
+
+    public Long getSenderId() {
+        return sender.getId();
+    }
+
+    public String getSenderName(){
+        return sender.getUsername();
+    }
 
 }
