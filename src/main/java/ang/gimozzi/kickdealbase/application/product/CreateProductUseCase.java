@@ -25,6 +25,7 @@ public class CreateProductUseCase {
                         .name(request.getName())
                         .description(request.getDescription())
                         .category(request.getCategory())
+                        .price(request.getPrice())
                         .seller(user)
                         .imageUrl(s3Service.uploadFile(image))
                         .build()
