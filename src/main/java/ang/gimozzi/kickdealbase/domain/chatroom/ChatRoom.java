@@ -20,23 +20,19 @@ public class ChatRoom {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne
+    private User user1;
+
+    @ManyToOne
+    private User user2;
+
     private String name;
 
-    @ManyToMany
-    private Set<User> users = new HashSet<>();
-
-    public void addUser(User user) {
-        users.add(user);
-
-    }
-    public void removeUser(User user) {
-        users.remove(user);
-    }
-
     @Builder
-    public ChatRoom(String name, Set<User> users){
+    public ChatRoom(User user1, User user2, String name) {
+        this.user1 = user1;
+        this.user2 = user2;
         this.name = name;
-        this.users = users;
     }
 
 }
