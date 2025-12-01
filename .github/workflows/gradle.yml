@@ -71,6 +71,7 @@ jobs:
             -e TOSS_BASE_URL=${{ secrets.TOSS_BASE_URL }} \
             -e EMAIL=${{ secrets.EMAIL }} \
             -e GOOGLE_PASSWORD=${{ secrets.GOOGLE_PASSWORD }} \
+            -e BUCKET_NAME=${{ secrets.BUCKET_NAME}} \
             ${{ secrets.DOCKERHUB_USERNAME }}/spring-cicd-test
 
       - name: Cleanup Old Images
