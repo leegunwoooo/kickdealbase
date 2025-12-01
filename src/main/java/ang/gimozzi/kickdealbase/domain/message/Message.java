@@ -1,5 +1,6 @@
-package ang.gimozzi.kickdealbase.domain.chatroom;
+package ang.gimozzi.kickdealbase.domain.message;
 
+import ang.gimozzi.kickdealbase.domain.chatroom.ChatRoom;
 import ang.gimozzi.kickdealbase.domain.user.User;
 import jakarta.persistence.*;
 import lombok.AccessLevel;

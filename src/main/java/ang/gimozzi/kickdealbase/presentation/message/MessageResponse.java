@@ -1,6 +1,6 @@
 package ang.gimozzi.kickdealbase.presentation.message;
 
-import ang.gimozzi.kickdealbase.domain.chatroom.Message;
+import ang.gimozzi.kickdealbase.domain.message.Message;
 
 import java.time.LocalDateTime;
 

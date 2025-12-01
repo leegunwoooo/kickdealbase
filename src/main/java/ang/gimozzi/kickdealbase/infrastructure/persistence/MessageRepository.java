@@ -1,6 +1,6 @@
 package ang.gimozzi.kickdealbase.infrastructure.persistence;
 
-import ang.gimozzi.kickdealbase.domain.chatroom.Message;
+import ang.gimozzi.kickdealbase.domain.message.Message;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
