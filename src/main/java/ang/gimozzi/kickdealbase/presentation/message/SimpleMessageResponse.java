@@ -1,0 +1,14 @@
+package ang.gimozzi.kickdealbase.presentation.message;
+
+import ang.gimozzi.kickdealbase.domain.message.Message;
+import ang.gimozzi.kickdealbase.domain.user.User;
+
+public record SimpleMessageResponse(
+        Long id,
+        String content,
+        User sender
+) {
+    public static SimpleMessageResponse from(Message message) {
+        return new SimpleMessageResponse(message.getId(), message.getContent(), message.getSender());
+    }
+}
