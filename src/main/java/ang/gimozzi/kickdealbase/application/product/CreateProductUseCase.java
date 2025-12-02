@@ -30,7 +30,7 @@ public class CreateProductUseCase {
                         .category(request.getCategory())
                         .price(request.getPrice())
                         .seller(user)
-                        .imageUrl(url)
+                        .imageUrl(fileName)
                         .build()
         );
 
