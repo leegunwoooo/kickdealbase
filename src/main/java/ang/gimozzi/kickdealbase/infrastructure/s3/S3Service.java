@@ -36,5 +36,9 @@ public class S3Service {
         return url.substring(url.indexOf(".amazonaws.com/") + 14);
     }
 
+    public String generateFileUrl(String fileName) {
+        return s3.getUrl(s3Properties.getBucket(), fileName).toString();
+    }
+
 }
 

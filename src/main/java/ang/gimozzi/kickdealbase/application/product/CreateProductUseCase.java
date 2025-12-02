@@ -20,16 +20,21 @@ public class CreateProductUseCase {
 
     @Transactional
     public ProductResponse createProduct(ProductRequest request, MultipartFile image, User user){
-        return new ProductResponse(productRepository.save(
+        String fileName = s3Service.uploadFile(image);
+        String url = s3Service.generateFileUrl(fileName);
+
+        Product product = productRepository.save(
                 Product.builder()
                         .name(request.getName())
                         .description(request.getDescription())
                         .category(request.getCategory())
                         .price(request.getPrice())
                         .seller(user)
-                        .imageUrl(s3Service.uploadFile(image))
+                        .imageUrl(url)
                         .build()
-        ));
+        );
+
+        return new ProductResponse(product, url);
     }
 
 }

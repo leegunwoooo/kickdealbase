@@ -21,13 +21,13 @@ public class ProductResponse {
 
     private final String url;
 
-    public ProductResponse(Product product) {
+    public ProductResponse(Product product, String url) {
         this.id = product.getId();
         this.name = product.getName();
         this.description = product.getDescription();
         this.category = product.getCategory();
         this.price = product.getPrice();
         this.seller = product.getSeller().getUsername();
-        this.url = product.getImageUrl();
+        this.url = url;
     }
 }

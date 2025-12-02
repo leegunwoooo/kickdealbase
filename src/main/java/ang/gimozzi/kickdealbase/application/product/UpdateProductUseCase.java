@@ -35,7 +35,9 @@ public class UpdateProductUseCase {
 
         product.update(request.getName(), request.getDescription(), request.getCategory(), request.getPrice(), url);
 
-        return new ProductResponse(product);
+        url = s3Service.generateFileUrl(url);
+
+        return new ProductResponse(product, url);
 
     }
 
