@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 
 @RequiredArgsConstructor
@@ -17,10 +19,13 @@ public class S3Service {
 
     public String uploadFile(MultipartFile file) {
         try {
-            String fileName = UUID.randomUUID() + "_" + file.getOriginalFilename();
+            String originalName = URLEncoder.encode(file.getOriginalFilename(), StandardCharsets.UTF_8);
+            String fileName = UUID.randomUUID() + "_" + originalName;
+
             ObjectMetadata metadata = new ObjectMetadata();
             metadata.setContentType(file.getContentType());
             metadata.setContentLength(file.getSize());
+
             s3.putObject(s3Properties.getBucket(), fileName, file.getInputStream(), metadata);
             return fileName;
         }catch (Exception e){
