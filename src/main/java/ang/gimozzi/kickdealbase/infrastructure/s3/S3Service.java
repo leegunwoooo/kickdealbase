@@ -50,5 +50,7 @@ public class S3Service {
         return s3.getUrl(s3Properties.getBucket(), fileName).toString();
     }
 
+    //Boolean isFuck = True;
+
 }
 
