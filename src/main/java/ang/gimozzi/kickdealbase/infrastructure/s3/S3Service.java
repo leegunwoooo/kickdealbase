@@ -1,7 +1,6 @@
 package ang.gimozzi.kickdealbase.infrastructure.s3;
 
 import com.amazonaws.services.s3.AmazonS3;
-import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -31,7 +30,7 @@ public class S3Service {
             metadata.setContentLength(file.getSize());
 
             s3.putObject(s3Properties.getBucket(), fileName, file.getInputStream(), metadata);
-            s3.setObjectAcl(s3Properties.getBucket(), fileName, CannedAccessControlList.PublicRead);
+
             return fileName;
         } catch (Exception e) {
             throw new RuntimeException(e);
