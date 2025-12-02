@@ -10,6 +10,8 @@ import ang.gimozzi.kickdealbase.presentation.chatroom.dto.response.ChatRoomRespo
 import ang.gimozzi.kickdealbase.shared.annotation.UseCase;
 import lombok.RequiredArgsConstructor;
 
+import java.security.InvalidParameterException;
+
 @UseCase
 @RequiredArgsConstructor
 public class CreateChatRoomUseCase {
@@ -23,6 +25,8 @@ public class CreateChatRoomUseCase {
 
         User seller = userFacade.getUser(product.getSellerId());
 
+        validate(product, seller.getId());
+
         return ChatRoomResponse.from(
                 chatRoomRepository.save(
                         ChatRoom.builder()
@@ -32,5 +36,11 @@ public class CreateChatRoomUseCase {
                                 .build()
                 )
         );
+    }
+
+    public void validate(Product product, Long userId){
+        if(!product.getSellerId().equals(userId)){
+            throw new InvalidParameterException("자기 자신과 대화할려 들지 마십시오");
+        }
     }
 }
