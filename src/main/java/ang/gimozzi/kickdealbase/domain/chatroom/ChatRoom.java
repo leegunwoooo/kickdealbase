@@ -32,5 +32,13 @@ public class ChatRoom {
         this.name = name;
     }
 
+    public String getSellerName() {
+        return seller.getUsername();
+    }
+
+    public String getBuyerName() {
+        return buyer.getUsername();
+    }
+
 }
 
