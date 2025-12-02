@@ -4,11 +4,11 @@ import ang.gimozzi.kickdealbase.domain.chatroom.ChatRoom;
 
 public record ChatRoomResponse(
         Long id,
-        String name,
+        Long productId,
         String buyer,
         String seller
 ) {
     public static ChatRoomResponse from(ChatRoom chatRoom){
-        return new  ChatRoomResponse(chatRoom.getId(), chatRoom.getName(), chatRoom.getBuyerName(), chatRoom.getSellerName());
+        return new  ChatRoomResponse(chatRoom.getId(), chatRoom.getProductId(), chatRoom.getBuyerName(), chatRoom.getSellerName());
     }
 }
