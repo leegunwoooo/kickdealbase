@@ -25,21 +25,22 @@ public class CreateChatRoomUseCase {
 
         User seller = userFacade.getUser(product.getSellerId());
 
-        validate(product, seller.getId());
+        validate(product, buyer.getId());
 
         return ChatRoomResponse.from(
-                chatRoomRepository.save(
-                        ChatRoom.builder()
-                                .name(product.getName())
-                                .buyer(buyer)
-                                .seller(seller)
-                                .build()
-                )
+                chatRoomRepository.findByBuyerAndSellerAndProductId(buyer, seller, productId)
+                        .orElseGet(() -> chatRoomRepository.save(
+                                ChatRoom.builder()
+                                        .buyer(buyer)
+                                        .seller(seller)
+                                        .productId(productId)
+                                        .build()
+                        ))
         );
     }
 
     public void validate(Product product, Long userId){
-        if(!product.getSellerId().equals(userId)){
+        if(product.getSellerId().equals(userId)){
             throw new InvalidParameterException("자기 자신과 대화할려 들지 마십시오");
         }
     }

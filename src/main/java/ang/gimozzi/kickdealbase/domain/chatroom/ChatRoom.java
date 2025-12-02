@@ -23,13 +23,13 @@ public class ChatRoom {
     @ManyToOne
     private User seller;
 
-    private String name;
+    private Long productId;
 
     @Builder
-    public ChatRoom(User buyer, User seller, String name) {
+    public ChatRoom(User buyer, User seller, Long productId) {
         this.buyer = buyer;
         this.seller = seller;
-        this.name = name;
+        this.productId = productId;
     }
 
     public String getSellerName() {
