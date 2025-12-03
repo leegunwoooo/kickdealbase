@@ -8,6 +8,7 @@ import ang.gimozzi.kickdealbase.domain.user.service.UserFacade;
 import ang.gimozzi.kickdealbase.infrastructure.persistence.ChatRoomRepository;
 import ang.gimozzi.kickdealbase.presentation.chatroom.dto.response.ChatRoomResponse;
 import ang.gimozzi.kickdealbase.shared.annotation.UseCase;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 import java.security.InvalidParameterException;
@@ -20,10 +21,9 @@ public class CreateChatRoomUseCase {
     private final UserFacade userFacade;
     private final ProductFacade productFacade;
 
-    public ChatRoomResponse createRoom(User user, Long productId){
+    @Transactional
+    public ChatRoomResponse createRoom(User buyer, Long productId){
         Product product = productFacade.getProduct(productId);
-
-        User buyer = userFacade.getUser(user.getId());
 
         User seller = userFacade.getUser(product.getSellerId());
 
