@@ -24,4 +24,8 @@ public class ChatRoomFacade {
         return chatRoomRepository.findDistinctByMessagesIsNotEmptyAndBuyerOrSeller(user, user);
     }
 
+    public List<ChatRoom> getChatRoomsByBuyer(User buyer){
+        return chatRoomRepository.findByBuyerOrSeller(buyer, buyer);
+    }
+
 }

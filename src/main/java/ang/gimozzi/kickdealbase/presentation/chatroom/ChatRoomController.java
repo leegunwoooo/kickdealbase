@@ -20,10 +20,10 @@ public class ChatRoomController {
 
     @PostMapping("/{product-id}")
     public ChatRoomResponse createChatRoom(
-            @AuthenticationPrincipal User user,
+            @AuthenticationPrincipal User buyer,
             @PathVariable(value = "product-id") Long productId
     ){
-        return createChatRoomUseCase.createRoom(user, productId);
+        return createChatRoomUseCase.createRoom(buyer, productId);
     }
 
     @GetMapping

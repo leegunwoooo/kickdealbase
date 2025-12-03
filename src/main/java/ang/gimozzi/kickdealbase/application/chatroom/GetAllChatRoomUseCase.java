@@ -15,7 +15,7 @@ public class GetAllChatRoomUseCase {
     private final ChatRoomFacade chatRoomFacade;
 
     public List<ChatRoomResponse> getChatRoomsByUser(User user){
-        return chatRoomFacade.getChatRoomsByUser(user)
+        return chatRoomFacade.getChatRoomsByBuyer(user)
                 .stream()
                 .map(ChatRoomResponse::from)
                 .toList();
