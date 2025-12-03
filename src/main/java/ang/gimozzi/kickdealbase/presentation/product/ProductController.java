@@ -5,6 +5,7 @@ import ang.gimozzi.kickdealbase.domain.product.Category;
 import ang.gimozzi.kickdealbase.domain.user.User;
 import ang.gimozzi.kickdealbase.presentation.product.dto.ProductRequest;
 import ang.gimozzi.kickdealbase.presentation.product.dto.ProductResponse;
+import ang.gimozzi.kickdealbase.shared.annotation.Admin;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -46,6 +47,7 @@ public class ProductController {
         return ResponseEntity.ok(updateProductUseCase.updateProduct(productRequest, image, user, id));
     }
 
+    @Admin
     @GetMapping
     public List<ProductResponse> getAllProducts() {
         return viewAllProductUseCase.getAllProducts();
