@@ -5,7 +5,6 @@ import ang.gimozzi.kickdealbase.domain.product.Category;
 import ang.gimozzi.kickdealbase.domain.user.User;
 import ang.gimozzi.kickdealbase.presentation.product.dto.ProductRequest;
 import ang.gimozzi.kickdealbase.presentation.product.dto.ProductResponse;
-import ang.gimozzi.kickdealbase.shared.annotation.Admin;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +27,6 @@ public class ProductController {
     private final ViewProductByCategory viewProductByCategoryUseCase;
     private final QueryProductByNameUseCase queryProductByNameUseCase;
 
-    @Admin
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<ProductResponse> createProduct(
             @RequestPart("product") ProductRequest productRequest,
