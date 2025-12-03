@@ -49,7 +49,9 @@ public class ProductController {
 
     @Admin
     @GetMapping
-    public List<ProductResponse> getAllProducts() {
+    public List<ProductResponse> getAllProducts(
+            @AuthenticationPrincipal User user
+    ) {
         return viewAllProductUseCase.getAllProducts();
     }
 

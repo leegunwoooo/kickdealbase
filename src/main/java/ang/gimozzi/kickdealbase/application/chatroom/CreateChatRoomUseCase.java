@@ -20,8 +20,10 @@ public class CreateChatRoomUseCase {
     private final UserFacade userFacade;
     private final ProductFacade productFacade;
 
-    public ChatRoomResponse createRoom(User buyer, Long productId){
+    public ChatRoomResponse createRoom(User user, Long productId){
         Product product = productFacade.getProduct(productId);
+
+        User buyer = userFacade.getUser(user.getId());
 
         User seller = userFacade.getUser(product.getSellerId());
 
