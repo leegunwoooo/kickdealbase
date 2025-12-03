@@ -28,6 +28,7 @@ public class ProductController {
     private final ViewProductByCategory viewProductByCategoryUseCase;
     private final QueryProductByNameUseCase queryProductByNameUseCase;
 
+    @Admin
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<ProductResponse> createProduct(
             @RequestPart("product") ProductRequest productRequest,
@@ -47,10 +48,8 @@ public class ProductController {
         return ResponseEntity.ok(updateProductUseCase.updateProduct(productRequest, image, user, id));
     }
 
-    @Admin
     @GetMapping
     public List<ProductResponse> getAllProducts(
-            @AuthenticationPrincipal User user
     ) {
         return viewAllProductUseCase.getAllProducts();
     }
