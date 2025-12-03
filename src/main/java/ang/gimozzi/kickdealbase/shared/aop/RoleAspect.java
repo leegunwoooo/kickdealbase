@@ -9,7 +9,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 public class RoleAspect {
 
-    @Before("@annotation(admin)")
+    @Before("@annotation(Admin)")
     public void checkAdmin(JoinPoint joinPoint, Admin admin) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth == null || !auth.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
