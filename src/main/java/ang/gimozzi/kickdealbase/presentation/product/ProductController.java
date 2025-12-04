@@ -6,6 +6,7 @@ import ang.gimozzi.kickdealbase.domain.user.User;
 import ang.gimozzi.kickdealbase.presentation.product.dto.ProductRequest;
 import ang.gimozzi.kickdealbase.presentation.product.dto.ProductResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -47,9 +48,10 @@ public class ProductController {
     }
 
     @GetMapping
-    public List<ProductResponse> getAllProducts(
+    public Page<ProductResponse> getAllProducts(
+            @RequestParam(defaultValue = "0") Integer page
     ) {
-        return viewAllProductUseCase.getAllProducts();
+        return viewAllProductUseCase.getAllProducts(page, 15);
     }
 
     @GetMapping("/{id}")
