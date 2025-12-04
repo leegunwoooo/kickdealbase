@@ -51,7 +51,7 @@ public class ProductController {
     public Page<ProductResponse> getAllProducts(
             @RequestParam(defaultValue = "0") Integer page
     ) {
-        return viewAllProductUseCase.getAllProducts(page, 15);
+        return viewAllProductUseCase.getAllProducts(page);
     }
 
     @GetMapping("/{id}")

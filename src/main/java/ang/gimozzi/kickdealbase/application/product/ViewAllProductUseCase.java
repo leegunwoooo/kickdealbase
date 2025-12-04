@@ -19,8 +19,8 @@ public class ViewAllProductUseCase {
     private final S3Service s3Service;
 
     @Transactional(readOnly = true)
-    public Page<ProductResponse> getAllProducts(Integer page, Integer size) {
-        Pageable pageable = PageRequest.of(page, size, Sort.by("id").descending());
+    public Page<ProductResponse> getAllProducts(Integer page) {
+        Pageable pageable = PageRequest.of(page, 15, Sort.by("id").descending());
 
         return productRepository.findAll(pageable)
                 .map(p -> new ProductResponse(p, s3Service.generateFileUrl(p.getImageUrl())));
