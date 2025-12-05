@@ -39,12 +39,6 @@ spring:
     hibernate:
       ddl-auto: update
 
-payment:
-  secret-key: ${TOSS_SECRET_KEY}
-  base-url: ${TOSS_BASE_URL}
-  confirm-endpoint: /confirm
-
-
 jwt:
   secret: ${SECRET_KEY}
 
