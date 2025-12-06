@@ -4,6 +4,7 @@ import ang.gimozzi.kickdealbase.domain.user.User;
 import ang.gimozzi.kickdealbase.infrastructure.jwt.service.TokenService;
 import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.simp.stomp.StompCommand;
@@ -15,7 +16,9 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Map;
 
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class WebSocketAuthChannelInterceptor implements ChannelInterceptor {
@@ -24,35 +27,34 @@ public class WebSocketAuthChannelInterceptor implements ChannelInterceptor {
 
     @Override
     public Message<?> preSend(Message<?> message, MessageChannel channel) {
-        System.out.println("=====================================");
-        System.out.println("🚨🚨🚨 INTERCEPTOR 실행됨!!! 🚨🚨🚨");
-        System.out.println("=====================================");
+        log.info("=====================================");
+        log.info("🚨🚨🚨 INTERCEPTOR 실행됨!!!");
+        log.info("=====================================");
 
         StompHeaderAccessor accessor = MessageHeaderAccessor.getAccessor(message, StompHeaderAccessor.class);
 
-        System.out.println("accessor: " + accessor);
+        log.info("accessor: {}", accessor);
 
         if (accessor == null) {
-            System.out.println("❌ accessor가 null");
+            log.error("❌ accessor가 null");
             return message;
         }
 
-        System.out.println("📍 StompCommand: " + accessor.getCommand());
+        log.info("📍 StompCommand: {}", accessor.getCommand());
 
-        // CONNECT: 최초 인증
         if (StompCommand.CONNECT.equals(accessor.getCommand())) {
-            System.out.println("🔌 CONNECT 처리 시작");
+            log.info("🔌 CONNECT 처리 시작");
             String token = accessor.getFirstNativeHeader("Authorization");
-            System.out.println("🎫 Authorization 헤더: " + token);
+            log.info("🎫 Authorization 헤더: {}", token != null ? "있음" : "없음");
 
             if (token != null && token.startsWith("Bearer ")) {
                 token = token.substring(7);
 
                 try {
                     Claims claims = tokenService.parseToken(token);
-                    System.out.println("claims=" + claims);
+                    log.info("claims={}", claims);
                     Long id = claims.get("id", Long.class);
-                    System.out.println("id=" + id);
+                    log.info("id={}", id);
 
                     if (id == null) {
                         throw new IllegalArgumentException("토큰에 id가 없습니다");
@@ -78,37 +80,49 @@ public class WebSocketAuthChannelInterceptor implements ChannelInterceptor {
                             );
 
                     accessor.setUser(authentication);
-                    accessor.getSessionAttributes().put("userPrincipal", principal);
 
-                    System.out.println("✅ CONNECT 성공 - userId: " + user.getId());
+                    Map<String, Object> sessionAttrs = accessor.getSessionAttributes();
+                    if (sessionAttrs != null) {
+                        sessionAttrs.put("userPrincipal", principal);
+                        log.info("✅ 세션에 userPrincipal 저장: {}", principal);
+                    } else {
+                        log.error("❌ sessionAttributes가 null!");
+                    }
+
+                    log.info("✅ CONNECT 성공 - userId: {}", user.getId());
 
                 } catch (Exception e) {
-                    System.err.println("❌ CONNECT 인증 실패: " + e.getMessage());
-                    e.printStackTrace();
+                    log.error("❌ CONNECT 인증 실패: {}", e.getMessage(), e);
                     throw new IllegalArgumentException(e.getMessage());
                 }
             } else {
-                System.err.println("❌ Authorization 헤더 없음");
+                log.error("❌ Authorization 헤더 없음");
                 throw new IllegalArgumentException("Authorization 헤더 없음");
             }
         }
 
-        // SEND, SUBSCRIBE: 세션에서 복원
         else if (StompCommand.SEND.equals(accessor.getCommand()) ||
                 StompCommand.SUBSCRIBE.equals(accessor.getCommand())) {
 
-            System.out.println("📤 SEND/SUBSCRIBE 처리 - command: " + accessor.getCommand());
+            log.info("📤 SEND/SUBSCRIBE 처리 - command: {}", accessor.getCommand());
 
             if (accessor.getUser() != null) {
-                System.out.println("✅ 이미 인증됨");
+                log.info("✅ 이미 인증됨: {}", accessor.getUser().getName());
                 return message;
             }
 
-            System.out.println("🔄 세션에서 복원 시도");
-            System.out.println("📦 sessionAttributes: " + accessor.getSessionAttributes());
+            log.info("🔄 세션에서 복원 시도");
+            Map<String, Object> sessionAttrs = accessor.getSessionAttributes();
+            log.info("📦 sessionAttributes: {}", sessionAttrs);
+            log.info("📦 sessionId: {}", accessor.getSessionId());
 
-            UserPrincipal principal = (UserPrincipal) accessor.getSessionAttributes().get("userPrincipal");
-            System.out.println("👤 복원된 principal: " + principal);
+            if (sessionAttrs == null) {
+                log.error("❌ sessionAttributes가 null!");
+                throw new IllegalArgumentException("세션이 없습니다");
+            }
+
+            UserPrincipal principal = (UserPrincipal) sessionAttrs.get("userPrincipal");
+            log.info("👤 복원된 principal: {}", principal);
 
             if (principal != null) {
                 UsernamePasswordAuthenticationToken authentication =
@@ -118,17 +132,18 @@ public class WebSocketAuthChannelInterceptor implements ChannelInterceptor {
                                 List.of(new SimpleGrantedAuthority("ROLE_" + principal.role().name()))
                         );
                 accessor.setUser(authentication);
-                System.out.println("✅ 인증 복원 성공 - userId: " + principal.id());
+                log.info("✅ 인증 복원 성공 - userId: {}", principal.id());
             } else {
-                System.err.println("❌ 세션에 userPrincipal 없음!");
+                log.error("❌ 세션에 userPrincipal 없음!");
+                log.error("❌ sessionAttributes keys: {}", sessionAttrs.keySet());
                 throw new IllegalArgumentException("인증 정보 없음");
             }
         } else {
-            System.out.println("ℹ️ 다른 command: " + accessor.getCommand());
+            log.info("ℹ️ 다른 command: {}", accessor.getCommand());
         }
 
-        System.out.println("🏁 Interceptor 종료");
-        System.out.println("=====================================");
+        log.info("🏁 Interceptor 종료");
+        log.info("=====================================");
         return message;
     }
 }
