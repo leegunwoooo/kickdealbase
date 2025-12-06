@@ -34,7 +34,9 @@ public class WebSocketAuthChannelInterceptor implements ChannelInterceptor {
 
                 try {
                     Claims claims = tokenService.parseToken(token);
+                    System.out.println("claims=" + claims);
                     Long id = claims.get("id", Long.class);
+                    System.out.println("id=" + id);
                     User user = tokenService.getUserId(id);
 
                     if (user == null) {
