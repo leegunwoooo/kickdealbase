@@ -41,9 +41,16 @@ public class WebSocketAuthChannelInterceptor implements ChannelInterceptor {
                         throw new IllegalArgumentException("유효하지 않은 토큰");
                     }
 
+                    UserPrincipal principal = new UserPrincipal(
+                            user.getId(),
+                            user.getUsername(),
+                            user.getRole()
+                    );
+
+
                     UsernamePasswordAuthenticationToken authentication =
                             new UsernamePasswordAuthenticationToken(
-                                    user,
+                                    principal,
                                     null,
                                     List.of(new SimpleGrantedAuthority("ROLE_" + user.getRole()))
                             );

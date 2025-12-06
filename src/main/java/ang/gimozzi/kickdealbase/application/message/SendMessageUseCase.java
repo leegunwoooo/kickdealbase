@@ -7,6 +7,7 @@ import ang.gimozzi.kickdealbase.domain.message.MessageType;
 import ang.gimozzi.kickdealbase.domain.user.User;
 import ang.gimozzi.kickdealbase.domain.user.service.UserFacade;
 import ang.gimozzi.kickdealbase.infrastructure.persistence.MessageRepository;
+import ang.gimozzi.kickdealbase.infrastructure.websocket.UserPrincipal;
 import ang.gimozzi.kickdealbase.presentation.message.dto.request.MessageRequest;
 import ang.gimozzi.kickdealbase.presentation.message.dto.response.MessageResponse;
 import ang.gimozzi.kickdealbase.shared.annotation.UseCase;
@@ -20,9 +21,9 @@ public class SendMessageUseCase {
     private final ChatRoomFacade chatRoomFacade;
     private final UserFacade userFacade;
 
-    public MessageResponse sendMessage(Long chatRoomId, User sender, MessageRequest request) {
+    public MessageResponse sendMessage(Long chatRoomId, UserPrincipal sender, MessageRequest request) {
         ChatRoom chatRoom = chatRoomFacade.getChatRoom(chatRoomId);
-        User user = userFacade.getUser(sender.getId());
+        User user = userFacade.getUser(sender.id());
 
         return MessageResponse.from(
                 messageRepository.save(

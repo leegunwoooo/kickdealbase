@@ -1,7 +1,7 @@
 package ang.gimozzi.kickdealbase.presentation.message;
 
 import ang.gimozzi.kickdealbase.application.message.SendMessageUseCase;
-import ang.gimozzi.kickdealbase.domain.user.User;
+import ang.gimozzi.kickdealbase.infrastructure.websocket.UserPrincipal;
 import ang.gimozzi.kickdealbase.presentation.message.dto.request.MessageRequest;
 import ang.gimozzi.kickdealbase.presentation.message.dto.response.MessageResponse;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +21,7 @@ public class MessageController {
     @MessageMapping("/chat/{roomId}/send")
     public void sendMessage(
             @DestinationVariable Long roomId,
-            @AuthenticationPrincipal User user,
+            @AuthenticationPrincipal UserPrincipal user,
             MessageRequest messageRequest
     ) {
         MessageResponse response = sendMessageUseCase.sendMessage(roomId, user, messageRequest);
