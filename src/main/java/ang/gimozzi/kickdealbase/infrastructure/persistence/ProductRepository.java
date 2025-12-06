@@ -2,6 +2,8 @@ package ang.gimozzi.kickdealbase.infrastructure.persistence;
 
 import ang.gimozzi.kickdealbase.domain.product.Category;
 import ang.gimozzi.kickdealbase.domain.product.Product;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -11,7 +13,7 @@ import java.util.List;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
-    List<Product> findProductsByCategory(Category category);
+    Page<Product> findProductsByCategory(Category category, Pageable pageable);
 
     @Query(
             value = "SELECT * FROM tbl_product " +

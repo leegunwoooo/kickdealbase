@@ -70,10 +70,11 @@ public class ProductController {
     }
 
     @GetMapping("/categories")
-    public List<ProductResponse> getProductsByCategory(
-            @RequestParam(name = "category") Category category
+    public Page<ProductResponse> getProductsByCategory(
+            @RequestParam(name = "category") Category category,
+            @RequestParam(defaultValue = "0") Integer page
     ){
-        return viewProductByCategoryUseCase.viewProductByCategory(category);
+        return viewProductByCategoryUseCase.viewProductByCategory(category, page);
     }
 
     @GetMapping("/query")
