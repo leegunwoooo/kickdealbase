@@ -34,8 +34,8 @@ public class WebSocketAuthChannelInterceptor implements ChannelInterceptor {
 
                 try {
                     Claims claims = tokenService.parseToken(token);
-                    Long uuid = claims.get("uuid", Long.class);
-                    User user = tokenService.getUserId(uuid);
+                    Long id = claims.get("id", Long.class);
+                    User user = tokenService.getUserId(id);
 
                     if (user == null) {
                         throw new IllegalArgumentException("유효하지 않은 토큰");
