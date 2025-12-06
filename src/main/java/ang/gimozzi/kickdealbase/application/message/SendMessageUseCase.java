@@ -22,12 +22,13 @@ public class SendMessageUseCase {
 
     public MessageResponse sendMessage(Long chatRoomId, User sender, MessageRequest request) {
         ChatRoom chatRoom = chatRoomFacade.getChatRoom(chatRoomId);
+        User user = userFacade.getUser(sender.getId());
 
         return MessageResponse.from(
                 messageRepository.save(
                         Message.builder()
                                 .room(chatRoom)
-                                .sender(sender)
+                                .sender(user)
                                 .content(request.getContent())
                                 .type(MessageType.CHAT)
                                 .build()
