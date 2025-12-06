@@ -13,7 +13,6 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -78,10 +77,11 @@ public class ProductController {
     }
 
     @GetMapping("/query")
-    public List<ProductResponse> getProductsByQuery(
-            @RequestParam(name = "query") String keyword
+    public Page<ProductResponse> getProductsByQuery(
+            @RequestParam(name = "query") String keyword,
+            @RequestParam(defaultValue = "0") Integer page
     ){
-        return queryProductByNameUseCase.getProductsByName(keyword);
+        return queryProductByNameUseCase.getProductsByName(keyword, page);
     }
 
 }
