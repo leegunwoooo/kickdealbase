@@ -2,6 +2,7 @@ package ang.gimozzi.kickdealbase.presentation.chatroom;
 
 import ang.gimozzi.kickdealbase.application.chatroom.CreateChatRoomUseCase;
 import ang.gimozzi.kickdealbase.application.chatroom.GetAllChatRoomUseCase;
+import ang.gimozzi.kickdealbase.application.chatroom.GetChatRoomInfoUseCase;
 import ang.gimozzi.kickdealbase.domain.user.User;
 import ang.gimozzi.kickdealbase.presentation.chatroom.dto.response.ChatRoomResponse;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +18,7 @@ public class ChatRoomController {
 
     private final CreateChatRoomUseCase createChatRoomUseCase;
     private final GetAllChatRoomUseCase getAllChatRoomUseCase;
+    private final GetChatRoomInfoUseCase getChatRoomInfoUseCase;
 
     @PostMapping("/{product-id}")
     public ChatRoomResponse createChatRoom(
@@ -32,5 +34,14 @@ public class ChatRoomController {
     ){
         return getAllChatRoomUseCase.getChatRoomsByUser(user);
     }
+
+    @GetMapping("/{id}")
+    public ChatRoomResponse getChatRoom(
+            @PathVariable Long id,
+            @AuthenticationPrincipal User user)
+    {
+        return getChatRoomInfoUseCase.getChatRoomInfo(id);
+    }
+
 
 }
