@@ -29,17 +29,20 @@ public class ChatRoom {
 
     private String name;
 
+    private Integer price;
+
     private Long productId;
 
     @OneToMany(mappedBy = "room", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Message> messages = new ArrayList<>();
 
     @Builder
-    public ChatRoom(User buyer, User seller, Long productId, String name) {
+    public ChatRoom(User buyer, User seller, Long productId, String name, Integer price) {
         this.buyer = buyer;
         this.seller = seller;
         this.productId = productId;
         this.name = name;
+        this.price = price;
     }
 
     public String getSellerName() {

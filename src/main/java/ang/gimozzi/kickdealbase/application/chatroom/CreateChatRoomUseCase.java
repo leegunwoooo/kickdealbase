@@ -37,6 +37,7 @@ public class CreateChatRoomUseCase {
                                         .seller(seller)
                                         .productId(productId)
                                         .name(product.getName())
+                                        .price(product.getPrice())
                                         .build()
                         ))
         );

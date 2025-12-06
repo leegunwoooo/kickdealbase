@@ -7,9 +7,10 @@ public record ChatRoomResponse(
         Long productId,
         String name,
         String buyer,
-        String seller
+        String seller,
+        Integer price
 ) {
     public static ChatRoomResponse from(ChatRoom chatRoom){
-        return new  ChatRoomResponse(chatRoom.getId(), chatRoom.getProductId(), chatRoom.getName(), chatRoom.getBuyerName(), chatRoom.getSellerName());
+        return new  ChatRoomResponse(chatRoom.getId(), chatRoom.getProductId(), chatRoom.getName(), chatRoom.getBuyerName(), chatRoom.getSellerName(), chatRoom.getPrice());
     }
 }
