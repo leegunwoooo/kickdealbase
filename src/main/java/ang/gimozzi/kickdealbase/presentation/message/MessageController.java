@@ -7,8 +7,8 @@ import ang.gimozzi.kickdealbase.presentation.message.dto.response.MessageRespons
 import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 
 @Controller
@@ -16,15 +16,15 @@ import org.springframework.stereotype.Controller;
 public class MessageController {
 
     private final SendMessageUseCase sendMessageUseCase;
+    private final SimpMessagingTemplate messagingTemplate;
 
     @MessageMapping("/chat/{roomId}/send")
-    @SendTo("/topic/{roomId}")
-    public MessageResponse sendMessage(
+    public void sendMessage(
             @DestinationVariable Long roomId,
             @AuthenticationPrincipal User user,
             MessageRequest messageRequest
-    ){
-        return sendMessageUseCase.sendMessage(roomId, user, messageRequest);
+    ) {
+        MessageResponse response = sendMessageUseCase.sendMessage(roomId, user, messageRequest);
+        messagingTemplate.convertAndSend("/topic/" + roomId, response);
     }
-
 }
