@@ -25,11 +25,18 @@ public class Product {
     @Enumerated(EnumType.STRING)
     private Category category;
 
+    @Enumerated(EnumType.STRING)
+    private Status status = Status.ON_SALE;
+
     @Column(nullable = false)
     private Integer price;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private User seller;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(nullable = true)
+    private User buyer;
 
     private String imageUrl;
 
@@ -60,4 +67,16 @@ public class Product {
     public Long getSellerId(){
         return seller.getId();
     }
+
+    public void changeStatus(Status status){
+        this.status = status;
+    }
+
+    public void sold(User user){
+        if(user != this.seller){
+            this.buyer = user;
+            changeStatus(Status.SOLD_OUT);
+        }
+    }
+
 }
