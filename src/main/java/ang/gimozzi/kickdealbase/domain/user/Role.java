@@ -2,7 +2,8 @@ package ang.gimozzi.kickdealbase.domain.user;
 
 public enum Role {
     ADMIN,
-    USER;
+    USER,
+    BANNED;
 
     @Override
     public String toString() {

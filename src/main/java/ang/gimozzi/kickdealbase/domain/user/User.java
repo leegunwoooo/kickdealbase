@@ -27,6 +27,8 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    private Integer opportunity = 2;
+
     @Builder
     public User(String email, String username, String password, Role role) {
         this.email = email;
@@ -41,6 +43,14 @@ public class User {
 
     public void updatePassword(String newPassword){
         this.password = newPassword;
+    }
+
+    public void decreaseOpportunity() {
+        this.opportunity--;
+    }
+
+    public void ban(){
+        this.role = Role.BANNED;
     }
 
 }
