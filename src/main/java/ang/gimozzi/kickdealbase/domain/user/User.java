@@ -50,7 +50,11 @@ public class User {
     }
 
     public void ban(){
-        this.role = Role.BANNED;
+        if(this.opportunity == 0){
+            this.role = Role.BANNED;
+        }else{
+            throw new IllegalArgumentException("실수 ㅎㅎ 죄송");
+        }
     }
 
 }
