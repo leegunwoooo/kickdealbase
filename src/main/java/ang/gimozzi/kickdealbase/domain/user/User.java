@@ -46,15 +46,18 @@ public class User {
     }
 
     public void decreaseOpportunity() {
+        if (this.opportunity <= 0) {
+            throw new IllegalStateException("더 이상 기회가 없습니다.");
+        }
         this.opportunity--;
+
+        if (this.opportunity == 0) {
+            ban();
+        }
     }
 
-    public void ban(){
-        if(this.opportunity == 0){
-            this.role = Role.BANNED;
-        }else{
-            throw new IllegalArgumentException("실수 ㅎㅎ 죄송");
-        }
+    public void ban() {
+        this.role = Role.BANNED;
     }
 
 }
