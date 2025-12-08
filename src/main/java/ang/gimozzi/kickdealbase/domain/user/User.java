@@ -63,7 +63,7 @@ public class User {
     }
 
     public void updatePoint(Integer point) {
-        this.point = point;
+        this.point += point;
     }
 
 }
