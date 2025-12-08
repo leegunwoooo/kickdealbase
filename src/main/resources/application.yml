@@ -8,6 +8,8 @@ spring:
             client-id: ${GOOGLE_CLIENT_ID}
             client-secret: ${GOOGLE_OAUTH_KEY}
             scope: profile,email
+            redirect-uri: "${BASE_URL}/login/oauth2/code/google"
+
 
   mail:
     host: smtp.gmail.com
