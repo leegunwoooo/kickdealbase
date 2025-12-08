@@ -4,7 +4,6 @@ import ang.gimozzi.kickdealbase.application.message.SendMessageUseCase;
 import ang.gimozzi.kickdealbase.infrastructure.websocket.UserPrincipal;
 import ang.gimozzi.kickdealbase.presentation.message.dto.request.MessageRequest;
 import ang.gimozzi.kickdealbase.presentation.message.dto.response.MessageResponse;
-import ang.gimozzi.kickdealbase.shared.annotation.ValidUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -20,7 +19,6 @@ public class MessageController {
     private final SendMessageUseCase sendMessageUseCase;
     private final SimpMessagingTemplate messagingTemplate;
 
-    @ValidUser
     @MessageMapping("/chat/{roomId}/send")
     public void sendMessage(@DestinationVariable Long roomId,
                             MessageRequest messageRequest,
