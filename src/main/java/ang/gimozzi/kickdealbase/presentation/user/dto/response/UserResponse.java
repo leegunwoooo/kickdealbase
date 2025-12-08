@@ -14,9 +14,12 @@ public class UserResponse {
 
     private String username;
 
+    private Integer point;
+
     public UserResponse(User user) {
         this.id = user.getId();
         this.email = user.getEmail();
         this.username = user.getUsername();
+        this.point = user.getPoint();
     }
 }
