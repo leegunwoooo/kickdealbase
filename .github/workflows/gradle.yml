@@ -72,6 +72,8 @@ jobs:
             -e EMAIL=${{ secrets.EMAIL }} \
             -e GOOGLE_PASSWORD=${{ secrets.GOOGLE_PASSWORD }} \
             -e BUCKET_NAME=${{ secrets.BUCKET_NAME}} \
+            -e GOOGLE_CLIENT_ID=${{ secrets.GOOGLE_CLIENT_ID}} \
+            -e GOOGLE_OAUTH_KEY=${{ secrets.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}} \
             ${{ secrets.DOCKERHUB_USERNAME }}/spring-cicd-test
 
       - name: Cleanup Old Images
