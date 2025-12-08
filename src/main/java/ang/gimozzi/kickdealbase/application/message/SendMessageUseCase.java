@@ -24,6 +24,7 @@ public class SendMessageUseCase {
     public MessageResponse sendMessage(Long chatRoomId, UserPrincipal sender, MessageRequest request) {
         ChatRoom chatRoom = chatRoomFacade.getChatRoom(chatRoomId);
         User user = userFacade.getUser(sender.id());
+        user.validBannedUser();
 
         return MessageResponse.from(
                 messageRepository.save(
