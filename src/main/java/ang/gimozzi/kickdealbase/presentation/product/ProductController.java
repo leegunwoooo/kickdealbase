@@ -27,6 +27,7 @@ public class ProductController {
     private final ViewProductByCategory viewProductByCategoryUseCase;
     private final QueryProductByNameUseCase queryProductByNameUseCase;
     private final BuyProductUseCase buyProductUseCase;
+    private final ViewMyProductUseCase viewMyProductUseCase;
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<ProductResponse> createProduct(
@@ -91,6 +92,14 @@ public class ProductController {
             @AuthenticationPrincipal User user
     ){
         return buyProductUseCase.buyProduct(id, user);
+    }
+
+    @GetMapping("/my")
+    public Page<ProductResponse> getMyProducts(
+            @AuthenticationPrincipal User user,
+            @RequestParam(defaultValue = "0") Integer page
+    ){
+        return viewMyProductUseCase.findAllMyProducts(user, page);
     }
 
 }
