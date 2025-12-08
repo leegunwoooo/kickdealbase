@@ -1,11 +1,9 @@
 package ang.gimozzi.kickdealbase.presentation.declaration;
 
-import ang.gimozzi.kickdealbase.application.declaration.ApproveDeclarationUseCase;
-import ang.gimozzi.kickdealbase.application.declaration.RejectDeclarationUseCase;
-import ang.gimozzi.kickdealbase.application.declaration.ReportMessageUseCase;
-import ang.gimozzi.kickdealbase.application.declaration.ReportProductUseCase;
+import ang.gimozzi.kickdealbase.application.declaration.*;
 import ang.gimozzi.kickdealbase.domain.user.User;
 import ang.gimozzi.kickdealbase.presentation.declaration.dto.request.DeclarationRequest;
+import ang.gimozzi.kickdealbase.presentation.declaration.dto.response.DeclarationListResponse;
 import ang.gimozzi.kickdealbase.presentation.declaration.dto.response.DeclarationResponse;
 import ang.gimozzi.kickdealbase.shared.annotation.Admin;
 import ang.gimozzi.kickdealbase.shared.annotation.ValidUser;
@@ -23,6 +21,7 @@ public class DeclarationController {
     private final ReportMessageUseCase reportMessageUseCase;
     private final ApproveDeclarationUseCase approveDeclarationUseCase;
     private final RejectDeclarationUseCase rejectDeclarationUseCase;
+    private final ViewAllDeclarationUseCase viewAllDeclarationUseCase;
 
     @ValidUser
     @PostMapping("/products/{product-id}")
@@ -60,6 +59,14 @@ public class DeclarationController {
             @AuthenticationPrincipal User user
     ){
         return rejectDeclarationUseCase.rejectDeclaration(id);
+    }
+
+    @Admin
+    @GetMapping
+    public DeclarationListResponse getAllDeclarations(
+            @AuthenticationPrincipal User user
+    ){
+        return viewAllDeclarationUseCase.getAllDeclarations();
     }
 
 }
