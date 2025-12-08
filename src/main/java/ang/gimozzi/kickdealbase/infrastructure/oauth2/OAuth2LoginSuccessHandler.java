@@ -7,21 +7,22 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
 @Component
 @RequiredArgsConstructor
-public class OAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
+public class OAuth2LoginSuccessHandler implements AuthenticationSuccessHandler {
 
     private final TokenService tokenService;
 
     private final ObjectMapper objectMapper;
 
     @Override
-    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
+    public void onAuthenticationSuccess(HttpServletRequest request,
+                                        HttpServletResponse response,
                                         Authentication authentication) throws IOException {
 
         PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
@@ -32,9 +33,9 @@ public class OAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
         TokenResponse tokenResponse = new TokenResponse(accessToken, refreshToken);
 
         response.setContentType("application/json;charset=UTF-8");
+        response.setStatus(HttpServletResponse.SC_OK);
         response.getWriter().write(objectMapper.writeValueAsString(tokenResponse));
-
-        clearAuthenticationAttributes(request);
+        response.getWriter().flush();
     }
 
 }
