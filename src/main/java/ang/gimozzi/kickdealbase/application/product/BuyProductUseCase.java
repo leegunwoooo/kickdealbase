@@ -18,12 +18,13 @@ public class BuyProductUseCase {
     private final S3Service s3Service;
 
     @Transactional
-    public ProductResponse buyProduct(Long id, User user) {
-        Product product = productFacade.getProduct(id);
+    public ProductResponse executeBuy(Long productId, User user) {
+        Product product = productFacade.getProduct(productId);
 
-        product.sold(user);
+        product.validatePurchaseBy(user);
+        product.purchaseBy(user);
 
-        return new ProductResponse(product, s3Service.generateFileUrl(product.getImageUrl()));
+        String imageUrl = s3Service.generateFileUrl(product.getImageUrl());
+        return new ProductResponse(product, imageUrl);
     }
-
 }

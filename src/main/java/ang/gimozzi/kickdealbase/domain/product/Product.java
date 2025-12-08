@@ -72,11 +72,22 @@ public class Product {
         this.status = status;
     }
 
-    public void sold(User user){
-        if (!this.seller.getId().equals(user.getId())) {
-            this.buyer = user;
-            this.status = Status.SOLD_OUT;
+    public void validatePurchaseBy(User user) {
+        if (this.seller.getId().equals(user.getId())) {
+            throw new IllegalArgumentException("자기 자신이 올린 상품은 구매할 수 없습니다.");
         }
+        if (user.getPoint() < this.price) {
+            throw new IllegalArgumentException("포인트가 부족합니다.");
+        }
+        if (this.status == Status.SOLD_OUT) {
+            throw new IllegalStateException("이미 판매 완료된 상품입니다.");
+        }
+    }
+
+    public void purchaseBy(User buyer) {
+        this.buyer = buyer;
+        this.status = Status.SOLD_OUT;
+        buyer.decreasePoint(this.price);
     }
 
 }

@@ -66,4 +66,11 @@ public class User {
         this.point += point;
     }
 
+    public void decreasePoint(Integer point) {
+        if (this.point < point) {
+            throw new IllegalArgumentException("포인트가 부족합니다.");
+        }
+        this.point -= point;
+    }
+
 }

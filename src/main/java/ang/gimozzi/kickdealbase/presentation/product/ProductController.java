@@ -96,7 +96,7 @@ public class ProductController {
             @PathVariable Long id,
             @AuthenticationPrincipal User user
     ){
-        return buyProductUseCase.buyProduct(id, user);
+        return buyProductUseCase.executeBuy(id, user);
     }
 
     @GetMapping("/my")
