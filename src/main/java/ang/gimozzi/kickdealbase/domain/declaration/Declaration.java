@@ -23,6 +23,12 @@ public class Declaration {
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
+    @Enumerated(EnumType.STRING)
+    private DeclarationStatus status = DeclarationStatus.PROCESSING;
+
+    @Enumerated(EnumType.STRING)
+    private Type type;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @Nullable
     private Message message;
@@ -38,6 +44,7 @@ public class Declaration {
         this.user = user;
         this.message = message;
         this.reason = reason;
+        this.type = Type.MESSAGE;
     }
 
     @Builder(builderMethodName = "productDeclarationBuilder")
@@ -45,10 +52,28 @@ public class Declaration {
         this.user = user;
         this.product = product;
         this.reason = reason;
+        this.type = Type.PRODUCT;
     }
 
     public void decreaseOpportunity() {
         this.user.decreaseOpportunity();
+    }
+
+    public String getMessageContent(){
+        return this.message.getContent();
+    }
+
+    public String getProductName(){
+        return this.product.getName();
+    }
+
+    public void approveDeclaration() {
+        this.status = DeclarationStatus.COMPLETED;
+        user.decreaseOpportunity();
+    }
+
+    public void rejectDeclaration() {
+        this.status = DeclarationStatus.REJECT;
     }
 
 }
