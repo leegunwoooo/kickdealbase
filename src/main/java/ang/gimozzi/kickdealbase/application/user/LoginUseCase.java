@@ -1,7 +1,7 @@
 package ang.gimozzi.kickdealbase.application.user;
 
 import ang.gimozzi.kickdealbase.domain.user.User;
-import ang.gimozzi.kickdealbase.infrastructure.persistence.UserRepository;
+import ang.gimozzi.kickdealbase.domain.user.service.UserFacade;
 import ang.gimozzi.kickdealbase.presentation.user.dto.request.LoginRequest;
 import ang.gimozzi.kickdealbase.infrastructure.jwt.dto.response.TokenResponse;
 import ang.gimozzi.kickdealbase.infrastructure.jwt.service.TokenService;
@@ -14,12 +14,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class LoginUseCase {
 
     private final TokenService tokenService;
-    private final UserRepository userRepository;
+    private final UserFacade userFacade;
     private final PasswordEncoder bCryptPasswordEncoder;
 
     public TokenResponse execute(LoginRequest request){
-        User user = userRepository.findByEmail(request.getEmail())
-                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 유저"));
+        User user = userFacade.findByEmail(request.getEmail());
+
+        user.validBannedUser();
 
         valid(request.getPassword(), user);
 
