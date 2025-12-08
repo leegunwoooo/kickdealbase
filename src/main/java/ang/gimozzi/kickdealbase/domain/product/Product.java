@@ -34,7 +34,7 @@ public class Product {
     @ManyToOne(fetch = FetchType.LAZY)
     private User seller;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(nullable = true)
     private User buyer;
 
