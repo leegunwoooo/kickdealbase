@@ -12,7 +12,16 @@ public record DeclarationResponse(
         Type type
 ) {
     public static DeclarationResponse from(Declaration declaration) {
-        String title = declaration.getType() == Type.MESSAGE ? declaration.getMessageContent() : declaration.getProductName();
+        String title;
+        if (declaration.getType() == Type.MESSAGE) {
+            title = (declaration.getMessage() != null)
+                    ? declaration.getMessageContent()
+                    : "(삭제된 메시지)";
+        } else {
+            title = (declaration.getProduct() != null)
+                    ? declaration.getProductName()
+                    : "(삭제된 상품)";
+        }
         return new DeclarationResponse(
                 declaration.getId(),
                 title,
