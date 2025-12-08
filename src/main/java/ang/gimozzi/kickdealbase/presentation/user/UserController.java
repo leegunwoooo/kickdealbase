@@ -6,6 +6,7 @@ import ang.gimozzi.kickdealbase.presentation.user.dto.request.LoginRequest;
 import ang.gimozzi.kickdealbase.presentation.user.dto.request.SignUpRequest;
 import ang.gimozzi.kickdealbase.presentation.user.dto.response.UserResponse;
 import ang.gimozzi.kickdealbase.infrastructure.jwt.dto.response.TokenResponse;
+import ang.gimozzi.kickdealbase.shared.annotation.ValidUser;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +31,7 @@ public class UserController {
     }
 
     @PatchMapping
+    @ValidUser
     public ResponseEntity<TokenResponse> login(
             @RequestBody @Valid LoginRequest request
     ){

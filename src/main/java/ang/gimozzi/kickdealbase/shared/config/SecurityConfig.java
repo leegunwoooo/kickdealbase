@@ -2,6 +2,7 @@ package ang.gimozzi.kickdealbase.shared.config;
 
 import ang.gimozzi.kickdealbase.infrastructure.jwt.JWTAuthenticationFilter;
 import ang.gimozzi.kickdealbase.infrastructure.jwt.service.TokenService;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -43,6 +44,21 @@ public class SecurityConfig {
                 )
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
+        http
+                .exceptionHandling()
+                .accessDeniedHandler((request, response, ex) -> {
+                    response.setStatus(403);
+                    response.setContentType("application/json;charset=UTF-8");
+
+                    String body = """
+            {
+                "status": 403,
+                "message": "%s"
+            }
+            """.formatted(ex.getMessage());
+
+                    response.getWriter().write(body);
+                });
         return http.build();
     }
 

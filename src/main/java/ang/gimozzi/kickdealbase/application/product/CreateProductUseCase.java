@@ -22,7 +22,6 @@ public class CreateProductUseCase {
     public ProductResponse createProduct(ProductRequest request, MultipartFile image, User user){
         String fileName = s3Service.uploadFile(image);
         String url = s3Service.generateFileUrl(fileName);
-        user.validBannedUser();
 
         Product product = productRepository.save(
                 Product.builder()

@@ -42,13 +42,6 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
                 Long id = claims.get("id", Long.class);
                 String roleString = claims.get("role", String.class);
 
-                if ("ROLE_BANNED".equals(roleString)) {
-                    SecurityContextHolder.clearContext();
-                    response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-                    response.getWriter().write("밴된 사용자입니다.");
-                    return;
-                }
-
                 User user = tokenService.getUserId(id);
 
                 if (user == null) {

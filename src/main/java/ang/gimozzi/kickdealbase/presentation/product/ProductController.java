@@ -5,6 +5,7 @@ import ang.gimozzi.kickdealbase.domain.product.Category;
 import ang.gimozzi.kickdealbase.domain.user.User;
 import ang.gimozzi.kickdealbase.presentation.product.dto.ProductRequest;
 import ang.gimozzi.kickdealbase.presentation.product.dto.ProductResponse;
+import ang.gimozzi.kickdealbase.shared.annotation.ValidUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
@@ -30,6 +31,7 @@ public class ProductController {
     private final ViewMyProductUseCase viewMyProductUseCase;
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @ValidUser
     public ResponseEntity<ProductResponse> createProduct(
             @RequestPart("product") ProductRequest productRequest,
             @RequestPart("image") MultipartFile image,
@@ -39,6 +41,7 @@ public class ProductController {
     }
 
     @PatchMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE, value = "/{id}")
+    @ValidUser
     public ResponseEntity<ProductResponse> updateProduct(
             @RequestPart("product") ProductRequest productRequest,
             @RequestPart(value = "image", required = false) MultipartFile image,
@@ -63,6 +66,7 @@ public class ProductController {
     }
 
     @DeleteMapping("/{id}")
+    @ValidUser
     public void deleteProduct(
             @PathVariable Long id,
             @AuthenticationPrincipal User user
@@ -87,6 +91,7 @@ public class ProductController {
     }
 
     @PostMapping("/{id}/buy")
+    @ValidUser
     public ProductResponse buyProduct(
             @PathVariable Long id,
             @AuthenticationPrincipal User user

@@ -5,6 +5,7 @@ import ang.gimozzi.kickdealbase.application.chatroom.GetAllChatRoomUseCase;
 import ang.gimozzi.kickdealbase.application.chatroom.GetChatRoomInfoUseCase;
 import ang.gimozzi.kickdealbase.domain.user.User;
 import ang.gimozzi.kickdealbase.presentation.chatroom.dto.response.ChatRoomResponse;
+import ang.gimozzi.kickdealbase.shared.annotation.ValidUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +21,7 @@ public class ChatRoomController {
     private final GetAllChatRoomUseCase getAllChatRoomUseCase;
     private final GetChatRoomInfoUseCase getChatRoomInfoUseCase;
 
+    @ValidUser
     @PostMapping("/{product-id}")
     public ChatRoomResponse createChatRoom(
             @AuthenticationPrincipal User buyer,

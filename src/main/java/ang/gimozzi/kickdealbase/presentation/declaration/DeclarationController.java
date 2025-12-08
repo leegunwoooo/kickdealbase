@@ -8,6 +8,7 @@ import ang.gimozzi.kickdealbase.domain.user.User;
 import ang.gimozzi.kickdealbase.presentation.declaration.dto.request.DeclarationRequest;
 import ang.gimozzi.kickdealbase.presentation.declaration.dto.response.DeclarationResponse;
 import ang.gimozzi.kickdealbase.shared.annotation.Admin;
+import ang.gimozzi.kickdealbase.shared.annotation.ValidUser;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -23,6 +24,7 @@ public class DeclarationController {
     private final ApproveDeclarationUseCase approveDeclarationUseCase;
     private final RejectDeclarationUseCase rejectDeclarationUseCase;
 
+    @ValidUser
     @PostMapping("/products/{product-id}")
     public DeclarationResponse createProductDeclaration(
             @PathVariable(value = "product-id") Long id,
@@ -32,6 +34,7 @@ public class DeclarationController {
         return reportProductUseCase.reportProduct(id, request);
     }
 
+    @ValidUser
     @PostMapping("/messages/{message-id}")
     public DeclarationResponse createMessageDeclaration(
             @PathVariable(value = "message-id") Long id,

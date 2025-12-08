@@ -25,8 +25,6 @@ public class CreateChatRoomUseCase {
     public ChatRoomResponse createRoom(User buyer, Long productId){
         Product product = productFacade.getProduct(productId);
 
-        buyer.validBannedUser();
-
         User seller = userFacade.getUser(product.getSellerId());
 
         validate(product, buyer.getId());

@@ -60,10 +60,4 @@ public class User {
         this.role = Role.BANNED;
     }
 
-    public void validBannedUser(){
-        if(role == Role.BANNED){
-            throw new IllegalStateException("밴된 유저입니다.");
-        }
-    }
-
 }

@@ -20,8 +20,6 @@ public class LoginUseCase {
     public TokenResponse execute(LoginRequest request){
         User user = userFacade.findByEmail(request.getEmail());
 
-        user.validBannedUser();
-
         valid(request.getPassword(), user);
 
         return new TokenResponse(
