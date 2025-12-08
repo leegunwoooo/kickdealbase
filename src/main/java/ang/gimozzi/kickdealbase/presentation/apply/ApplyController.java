@@ -3,8 +3,10 @@ package ang.gimozzi.kickdealbase.presentation.apply;
 import ang.gimozzi.kickdealbase.application.point.ApplyChargePointUseCase;
 import ang.gimozzi.kickdealbase.application.point.ApproveApplyUseCase;
 import ang.gimozzi.kickdealbase.application.point.RejectApplyUseCase;
+import ang.gimozzi.kickdealbase.application.point.ViewAllApplyUseCase;
 import ang.gimozzi.kickdealbase.domain.user.User;
 import ang.gimozzi.kickdealbase.presentation.apply.dto.request.ApplyRequest;
+import ang.gimozzi.kickdealbase.presentation.apply.dto.response.ApplyListResponse;
 import ang.gimozzi.kickdealbase.presentation.apply.dto.response.ApplyResponse;
 import ang.gimozzi.kickdealbase.shared.annotation.Admin;
 import jakarta.validation.Valid;
@@ -20,6 +22,7 @@ public class ApplyController {
     private final ApproveApplyUseCase approveApplyUseCase;
     private final ApplyChargePointUseCase applyChargePointUseCase;
     private final RejectApplyUseCase rejectApplyUseCase;
+    private final ViewAllApplyUseCase viewAllApplyUseCase;
 
     @PostMapping
     public ApplyResponse apply(
@@ -45,6 +48,14 @@ public class ApplyController {
             @PathVariable Long id
     ){
         return rejectApplyUseCase.reject(id);
+    }
+
+    @Admin
+    @GetMapping
+    public ApplyListResponse viewAllApply(
+            @AuthenticationPrincipal User user
+    ){
+        return viewAllApplyUseCase.viewAllApply();
     }
 
 }
