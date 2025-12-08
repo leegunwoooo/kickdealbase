@@ -12,7 +12,7 @@ public record DeclarationResponse(
         Type type
 ) {
     public static DeclarationResponse from(Declaration declaration) {
-        String title = declaration.getMessage() != null ? declaration.getMessageContent() : declaration.getProductName();
+        String title = declaration.getType() == Type.MESSAGE ? declaration.getMessageContent() : declaration.getProductName();
         return new DeclarationResponse(
                 declaration.getId(),
                 title,
