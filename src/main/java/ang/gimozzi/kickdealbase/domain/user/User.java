@@ -62,7 +62,7 @@ public class User {
         this.role = Role.BANNED;
     }
 
-    public void updatePoint(Integer point) {
+    public void calculatePoint(Integer point) {
         this.point += point;
     }
 
