@@ -59,8 +59,8 @@ public class Product {
     }
 
     public void validUser(User user){
-        if(!this.seller.getId().equals(user.getId())){
-            throw new IllegalArgumentException("작성자만 수정할 수 있습니다.");
+        if(this.seller.getId().equals(user.getId())){
+            throw new IllegalArgumentException("자기 자신이 올린 상품입니다.");
         }
     }
 
@@ -73,9 +73,9 @@ public class Product {
     }
 
     public void sold(User user){
-        if(user != this.seller){
+        if (!this.seller.getId().equals(user.getId())) {
             this.buyer = user;
-            changeStatus(Status.SOLD_OUT);
+            this.status = Status.SOLD_OUT;
         }
     }
 

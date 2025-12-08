@@ -26,6 +26,7 @@ public class ProductController {
     private final DeleteProductUseCase deleteProductUseCase;
     private final ViewProductByCategory viewProductByCategoryUseCase;
     private final QueryProductByNameUseCase queryProductByNameUseCase;
+    private final BuyProductUseCase buyProductUseCase;
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<ProductResponse> createProduct(
@@ -82,6 +83,14 @@ public class ProductController {
             @RequestParam(defaultValue = "0") Integer page
     ){
         return queryProductByNameUseCase.getProductsByName(keyword, page);
+    }
+
+    @PostMapping("/{id}/buy")
+    public ProductResponse buyProduct(
+            @PathVariable Long id,
+            @AuthenticationPrincipal User user
+    ){
+        return buyProductUseCase.buyProduct(id, user);
     }
 
 }
