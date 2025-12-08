@@ -24,6 +24,8 @@ public class User {
 
     private String password;
 
+    private Integer point = 0;
+
     @Enumerated(EnumType.STRING)
     private Role role;
 
@@ -58,6 +60,10 @@ public class User {
 
     public void ban() {
         this.role = Role.BANNED;
+    }
+
+    public void updatePoint(Integer point) {
+        this.point = point;
     }
 
 }
