@@ -6,6 +6,7 @@ import ang.gimozzi.kickdealbase.domain.user.User;
 
 import ang.gimozzi.kickdealbase.presentation.product.dto.ProductResponse;
 import ang.gimozzi.kickdealbase.shared.annotation.UseCase;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @UseCase
@@ -14,10 +15,9 @@ public class BuyProductUseCase {
 
     private final ProductFacade productFacade;
 
+    @Transactional
     public ProductResponse buyProduct(Long id, User user) {
         Product product = productFacade.getProduct(id);
-
-        product.validUser(user);
 
         product.sold(user);
 

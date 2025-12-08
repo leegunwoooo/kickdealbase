@@ -2,6 +2,7 @@ package ang.gimozzi.kickdealbase.infrastructure.persistence;
 
 import ang.gimozzi.kickdealbase.domain.product.Category;
 import ang.gimozzi.kickdealbase.domain.product.Product;
+import ang.gimozzi.kickdealbase.domain.user.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -20,5 +21,5 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     )
     Page<Product> findProductsByNameContaining(@Param("keyword") String keyword, Pageable pageable);
 
-    Page<Product> findAllBySellerIdOrBuyerId(Long sellerId, Long buyerId, Pageable pageable);
+    Page<Product> findAllBySellerOrBuyer(User seller, User buyer, Pageable pageable);
 }
