@@ -39,7 +39,6 @@ public class Declaration {
 
     private String reason;
 
-    @Builder(builderMethodName = "messageDeclarationBuilder")
     public Declaration(User user, Message message, String reason){
         this.user = user;
         this.message = message;
@@ -47,7 +46,6 @@ public class Declaration {
         this.type = Type.MESSAGE;
     }
 
-    @Builder(builderMethodName = "productDeclarationBuilder")
     public Declaration(User user, Product product, String reason){
         this.user = user;
         this.product = product;

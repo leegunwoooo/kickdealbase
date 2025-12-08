@@ -18,21 +18,13 @@ public class DeclarationFixture {
 
     public Declaration reportMessage(User user, Message message, String reason) {
         return declarationRepository.save(
-                Declaration.messageDeclarationBuilder()
-                        .user(user)
-                        .message(message)
-                        .reason(reason)
-                        .build()
+                new Declaration(user, message, reason)
         );
     }
 
     public Declaration reportProduct(User user, Product product, String reason) {
         return declarationRepository.save(
-                Declaration.productDeclarationBuilder()
-                        .user(user)
-                        .product(product)
-                        .reason(reason)
-                        .build()
+                new Declaration(user, product, reason)
         );
     }
 
