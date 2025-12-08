@@ -22,10 +22,21 @@ public class Apply {
 
     private Integer point;
 
+    @Enumerated(EnumType.STRING)
+    private ApplyStatus status = ApplyStatus.WAITING;
+
     @Builder
     public Apply(User user, Integer point) {
         this.user = user;
         this.point = point;
+    }
+
+    public void reject(){
+        this.status = ApplyStatus.REJECT;
+    }
+
+    public String getUserName(){
+        return this.user.getUsername();
     }
 
 }
