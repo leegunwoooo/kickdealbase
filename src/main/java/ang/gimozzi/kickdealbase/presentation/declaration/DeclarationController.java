@@ -23,7 +23,7 @@ public class DeclarationController {
     private final ApproveDeclarationUseCase approveDeclarationUseCase;
     private final RejectDeclarationUseCase rejectDeclarationUseCase;
 
-    @PostMapping("/{product-id}")
+    @PostMapping("/products/{product-id}")
     public DeclarationResponse createProductDeclaration(
             @PathVariable(value = "product-id") Long id,
             @AuthenticationPrincipal User user,
@@ -32,7 +32,7 @@ public class DeclarationController {
         return reportProductUseCase.reportProduct(id, request);
     }
 
-    @PostMapping("/{message-id}")
+    @PostMapping("/messages/{message-id}")
     public DeclarationResponse createMessageDeclaration(
             @PathVariable(value = "message-id") Long id,
             @AuthenticationPrincipal User user,
