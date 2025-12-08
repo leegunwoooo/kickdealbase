@@ -14,7 +14,6 @@ import lombok.NoArgsConstructor;
 @Table(name = "tbl_declaration")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Builder
 public class Declaration {
 
     @Id
