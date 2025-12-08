@@ -2,7 +2,8 @@ package ang.gimozzi.kickdealbase.shared.config;
 
 import ang.gimozzi.kickdealbase.infrastructure.jwt.JWTAuthenticationFilter;
 import ang.gimozzi.kickdealbase.infrastructure.jwt.service.TokenService;
-import jakarta.servlet.http.HttpServletResponse;
+import ang.gimozzi.kickdealbase.infrastructure.oauth2.OAuth2LoginSuccessHandler;
+import ang.gimozzi.kickdealbase.infrastructure.oauth2.PrincipalOauth2UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,6 +24,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
 
     private final TokenService tokenService;
+    private final PrincipalOauth2UserService principalOauth2UserService;
+    private final OAuth2LoginSuccessHandler oAuth2LoginSuccessHandler;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -59,6 +62,12 @@ public class SecurityConfig {
 
                     response.getWriter().write(body);
                 });
+        http
+                .oauth2Login(oauth2 -> oauth2
+                .userInfoEndpoint(
+                        userInfoEndpoint -> userInfoEndpoint.userService(principalOauth2UserService))
+                .successHandler(oAuth2LoginSuccessHandler)
+        );
         return http.build();
     }
 

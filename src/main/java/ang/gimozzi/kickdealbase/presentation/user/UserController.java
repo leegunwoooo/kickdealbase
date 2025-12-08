@@ -7,11 +7,14 @@ import ang.gimozzi.kickdealbase.presentation.user.dto.request.SignUpRequest;
 import ang.gimozzi.kickdealbase.presentation.user.dto.response.UserResponse;
 import ang.gimozzi.kickdealbase.infrastructure.jwt.dto.response.TokenResponse;
 import ang.gimozzi.kickdealbase.shared.annotation.ValidUser;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
 
 @RestController
 @RequestMapping("/users")
@@ -36,6 +39,11 @@ public class UserController {
             @RequestBody @Valid LoginRequest request
     ){
         return ResponseEntity.ok(loginUseCase.execute(request));
+    }
+
+    @GetMapping("/login/google")
+    public void googleLogin(HttpServletResponse response) throws IOException {
+        response.sendRedirect("/oauth2/authorization/google");
     }
 
     @GetMapping
