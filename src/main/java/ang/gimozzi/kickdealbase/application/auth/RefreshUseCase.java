@@ -1,4 +1,4 @@
-package ang.gimozzi.kickdealbase.application.user;
+package ang.gimozzi.kickdealbase.application.auth;
 
 import ang.gimozzi.kickdealbase.infrastructure.jwt.dto.response.TokenResponse;
 import ang.gimozzi.kickdealbase.infrastructure.jwt.service.TokenService;
