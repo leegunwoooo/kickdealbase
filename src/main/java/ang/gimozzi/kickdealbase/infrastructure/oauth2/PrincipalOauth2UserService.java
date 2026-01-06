@@ -26,8 +26,6 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
         String provideId = oauth2User.getAttribute("sub");
         String email = oauth2User.getAttribute("email");
         String username = oauth2User.getAttribute("name");
-        String password = "OAuth2";
-        Role role = Role.USER;
 
         Optional<User> user = userRepository.findByEmail(email);
 
@@ -35,8 +33,8 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
             User newUser = User.builder()
                     .email(email)
                     .username(username)
-                    .password(password)
-                    .role(role)
+                    .password(null)
+                    .role(Role.USER)
                     .build();
 
             userRepository.save(newUser);
