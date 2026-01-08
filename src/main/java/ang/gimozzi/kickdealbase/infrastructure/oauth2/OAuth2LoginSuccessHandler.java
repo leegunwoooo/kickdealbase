@@ -27,10 +27,10 @@ public class OAuth2LoginSuccessHandler implements AuthenticationSuccessHandler {
 
         PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
 
-        String accessToken = tokenService.generateAccessToken(principalDetails.getUser());
-        String refreshToken = tokenService.generateRefreshToken(principalDetails.getUser());
-
-        TokenResponse tokenResponse = new TokenResponse(accessToken, refreshToken);
+        TokenResponse tokenResponse = new TokenResponse(
+                tokenService.generateAccessToken(principalDetails.getUser()),
+                        tokenService.generateRefreshToken(principalDetails.getUser())
+        );
 
         response.setContentType("application/json;charset=UTF-8");
         response.setStatus(HttpServletResponse.SC_OK);
