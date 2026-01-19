@@ -1,8 +1,5 @@
 package ang.gimozzi.kickdealbase.shared.aop;
 
-import ang.gimozzi.kickdealbase.shared.annotation.Admin;
-import ang.gimozzi.kickdealbase.shared.annotation.ValidUser;
-import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.springframework.security.access.AccessDeniedException;
@@ -15,16 +12,16 @@ import org.springframework.stereotype.Component;
 @Component
 public class RoleAspect {
 
-    @Before("@annotation(admin)")
-    public void checkAdmin(JoinPoint joinPoint, Admin admin) {
+    @Before("@annotation(ang.gimozzi.kickdealbase.shared.annotation.Admin)")
+    public void checkAdmin() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (!auth.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
             throw new AccessDeniedException("관리자만 접근 가능합니다.");
         }
     }
 
-    @Before("@annotation(validUser)")
-    public void checkUser(JoinPoint joinPoint, ValidUser validUser) {
+    @Before("@annotation(ang.gimozzi.kickdealbase.shared.annotation.ValidUser)")
+    public void checkUser() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if(auth.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_BANNED"))) {
             throw new AccessDeniedException("밴당하셨습니다.");
